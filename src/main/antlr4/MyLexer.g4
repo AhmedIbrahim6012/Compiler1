@@ -15,7 +15,7 @@ NUMBER: INTEGER | FLOAT_NUMBER ;
 
 
 
-AND        : 'and';
+AND         : 'and';
 AS         : 'as';
 DEF        : 'def';
 ELIF       : 'elif';
