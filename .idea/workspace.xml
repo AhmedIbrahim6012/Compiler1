@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="">
+    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="edit lexer">
       <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +82,27 @@
       <option name="presentableId" value="Default" />
       <updated>1763826707442</updated>
     </task>
+    <task id="LOCAL؜-٠٠٠٠١" summary="edit lexer">
+      <option name="closed" value="true" />
+      <created>1765456712213</created>
+      <option name="number" value="٠٠٠٠١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1765456712213</updated>
+    </task>
+    <task id="LOCAL؜-٠٠٠٠٢" summary="edit lexer">
+      <option name="closed" value="true" />
+      <created>1765456808646</created>
+      <option name="number" value="٠٠٠٠٢" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠٢" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1765456808646</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="edit lexer" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit lexer" />
   </component>
 </project>
