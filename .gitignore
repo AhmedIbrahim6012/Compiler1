@@ -12,6 +12,13 @@ target/
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
+=======
+src/main/antlr4/gen/
+src/main/antlr4/PythonLexer.g4
+src/main/antlr4/PythonParser.g4
+src/main/antlr4/Test.g4
+>>>>>>> hammoud
 
 ### Eclipse ###
 .apt_generated
