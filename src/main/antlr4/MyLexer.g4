@@ -24,6 +24,7 @@ tokens {
           tokens.remove(i);
         }
       }
+
       this.emit(commonToken(MyParser.NEWLINE, "\n"));
       while (!indents.isEmpty()) {
         this.emit(createDedent());
