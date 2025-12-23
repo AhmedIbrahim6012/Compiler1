@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -21,14 +22,53 @@
             <version>4.9.3</version>
         </dependency>
     </dependencies>
+=======
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>NewCompiler</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>NewCompiler</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+      <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+  </dependency>
+    <dependency>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-runtime</artifactId>
+        <version>4.13.2</version>
+    </dependency>
+  </dependencies>
+>>>>>>> hammoud
     <build>
         <plugins>
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
+<<<<<<< HEAD
                 <version>4.9.3</version>
                 <configuration>
                     <visitor>true</visitor>
+=======
+                <version>4.13.2</version>
+                <configuration>
+                    <sourceDirectory>src/main/antlr4</sourceDirectory>
+                    <visitor>true</visitor>
+                    <listener>true</listener>
+>>>>>>> hammoud
                 </configuration>
                 <executions>
                     <execution>
@@ -38,7 +78,18 @@
                     </execution>
                 </executions>
             </plugin>
+<<<<<<< HEAD
         </plugins>
     </build>
 
 </project>
+=======
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+>>>>>>> hammoud

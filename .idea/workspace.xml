@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="" />
+    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="New Commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,16 +23,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AhmedIbrahim6012/Compiler1.git",
-    "accountId": "d27dd03e-0a00-4da7-95e7-c6368b24dd27"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AhmedIbrahim6012/Compiler1.git&quot;,
+    &quot;accountId&quot;: &quot;d27dd03e-0a00-4da7-95e7-c6368b24dd27&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="35q9OHLOjvLy5JVXIfZcVoPTyBz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -42,7 +48,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Ahmed",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/CompilerProjects/MyFirstProject",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
@@ -76,6 +82,19 @@
       <option name="presentableId" value="Default" />
       <updated>1763826707442</updated>
     </task>
+    <task id="LOCAL-00001" summary="New Commit">
+      <option name="closed" value="true" />
+      <created>1766470070591</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766470070591</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="New Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Commit" />
   </component>
 </project>
