@@ -2,7 +2,7 @@ lexer grammar Example;
 
 EXPRESSION : '{{' .*? '}}' ;
 STATEMENT : '{%' .*? '%}';
-COMMENT_JINJA2 : '{#' .*? '#}' ;
+COMMENT_JINJA2 : '{#' .*? '#}' -> skip ;
 
 //htmllexer
 DOCTYPE: '<!' [Dd][Oo][Cc][Tt][Yy][Pp][Ee] (~'>')* '>';
@@ -12,6 +12,7 @@ OPEN_TAG: '<' -> pushMode(TAG_MODE);
 CLOSE_TAG: '</' -> pushMode(TAG_MODE);
 ENTITY: '&' [A-Za-z0-9#]+ ';' ;
 TEXT: ~[<\r\n]+ ;
+COMMENT:'<!--' .*? '-->' -> skip ;
 LBRACE_HTML: '{' ;
 WS: [ \t]+ -> skip;
 NEWLINE: [ \r\n]+ -> skip;
@@ -30,7 +31,7 @@ SLASH: '/';
 
 SELF_CLOSE: '/>' -> popMode ;
 TAG_CLOSE: '>' -> popMode;
-COMMENT:'<!--' .*? '-->' ;
+COMMENT_:'<!--' .*? '-->' ;
 WS_IN_TAG: [ \t\r\n]+ -> skip;
 
  //csslexer style

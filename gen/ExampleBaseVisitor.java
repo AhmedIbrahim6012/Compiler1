@@ -1,4 +1,4 @@
-// Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/Example.g4 by ANTLR 4.13.2
+package gen;// Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/Example.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**

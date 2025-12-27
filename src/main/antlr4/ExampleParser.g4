@@ -9,11 +9,11 @@ element:
     |styleElement
     |EXPRESSION
     |STATEMENT
-
     | LBRACE_HTML
     | TEXT
     | ENTITY
-    |COMMENT;
+
+     ;
     htmlElement
         : OPEN_TAG TAG_NAME attribute* TAG_CLOSE element* CLOSE_TAG TAG_NAME TAG_CLOSE
         | OPEN_TAG TAG_NAME attribute* SELF_CLOSE
@@ -26,10 +26,6 @@ element:
     attributeValue: DOUBLE_QUOTED_VALUE
     | SINGLE_QUOTED_VALUE
     | UNQUOTED_VALUE;
-
-//    jinja2Element: IDENT_JINJA2* JINJA_EXPR_START jinja2Rule*
-//        |JINJA_STMT_START jinja2Rule*
-//        |JINJA_COMM_START jinja2Rule*;
 
     jinja2Rule:EXPRESSION
         |STATEMENT
