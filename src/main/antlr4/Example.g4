@@ -1,5 +1,7 @@
 lexer grammar Example;
 
+
+
 EXPRESSION : '{{' .*? '}}' ;
 STATEMENT : '{%' .*? '%}';
 COMMENT_JINJA2 : '{#' .*? '#}' -> skip ;
@@ -43,7 +45,7 @@ WS_IN_TAG: [ \t\r\n]+ -> skip;
   SEMICOLON: ';' ;
   STAR: '*' ;
   COMMA: ',' ;
-  COLOR_HEX: '#'[0-9A-Fa-f]*{3,6};
+  COLOR_HEX : '#' ([0-9A-Fa-f]{6} | [0-9A-Fa-f]{3});
    CLASS_SELECTOR: '.' IDENT ;
    ID_SELECTOR: '#'   IDENT ;
    AT: '@';

@@ -1,4 +1,5 @@
 parser grammar ExampleParser;
+
 options { tokenVocab = Example;}
 
 htmlDocument:element* doctype? element* EOF;

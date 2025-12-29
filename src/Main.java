@@ -1,13 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import AST.ASTBuilder;
+import AST.ASTNode;
+import AST.AstPrinter;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        String input = "<!DOCTYPE html><div>Hello</div>";
+
+        Example lexer =
+                new Example(CharStreams.fromString(input));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ExampleParser parser = new ExampleParser(tokens);
+
+        ASTBuilder builder = new ASTBuilder();
+        ASTNode ast = builder.visit(parser.htmlDocument());
+
+        AstPrinter printer = new AstPrinter();
+        ast.accept(printer);
     }
 }

@@ -5,7 +5,7 @@ public class HtmlAttributeNode extends ASTNode {
     private String key;
     private String value;
 
-    public HtmlAttributeNode(String key, String value, int line) {
+    public HtmlAttributeNode(String key, int line) {
         super("HtmlAttribute", line);
         this.key = key;
         this.value = value;
