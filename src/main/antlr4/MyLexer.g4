@@ -180,11 +180,6 @@ RIGHT_SHIFT_ASSIGN : '>>=';
 POWER_ASSIGN       : '**=';
 IDIV_ASSIGN        : '//=';
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> hammoud
 NAME : [a-zA-Z_] ([a-zA-Z_0-9])* ;
 SKIP_: ( SPACES | COMMENT | LINE_JOINING) -> skip;
 UNKNOWN_CHAR: .;
