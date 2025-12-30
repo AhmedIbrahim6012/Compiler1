@@ -4,18 +4,27 @@
     <option name="perGrammarGenerationSettings">
       <list>
         <PerGrammarGenerationSettings>
+<<<<<<< HEAD
           <option name="fileName" value="$PROJECT_DIR$/src/main/antlr4/MyParser.g4" />
+=======
+          <option name="fileName" value="$PROJECT_DIR$/src/main/antlr4/Example.g4" />
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
           <option name="autoGen" value="true" />
           <option name="outputDir" value="" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
+<<<<<<< HEAD
           <option name="pkg" value="MyLang" />
+=======
+          <option name="pkg" value="" />
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ExternalStorageConfigurationManager" enabled="true" />
 <<<<<<< HEAD
   <component name="ProjectRootManager" version="2" default="true">
@@ -29,6 +38,9 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="19" project-jdk-type="JavaSDK">
 >>>>>>> hammoud
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="25" project-jdk-type="JavaSDK">
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
