@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -12,10 +13,21 @@ target/
 *.iws
 *.iml
 *.ipr
+
+gen/
 src/main/antlr4/gen/
 src/main/antlr4/PythonLexer.g4
 src/main/antlr4/PythonParser.g4
 src/main/antlr4/Test.g4
+src/main/antlr4/MyPythonLexer.g4
+src/main/antlr4/MyPythonParser.g4
+=======
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.kotlin
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
 
 ### Eclipse ###
 .apt_generated
@@ -25,6 +37,12 @@ src/main/antlr4/Test.g4
 .settings
 .springBeans
 .sts4-cache
+<<<<<<< HEAD
+=======
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,9 +50,12 @@ src/main/antlr4/Test.g4
 /dist/
 /nbdist/
 /.nb-gradle/
+<<<<<<< HEAD
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+=======
+>>>>>>> b90ccbd641435452d6ed3749a4bd8b2ca94fa6e4
 
 ### VS Code ###
 .vscode/

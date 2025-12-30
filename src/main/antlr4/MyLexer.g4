@@ -5,6 +5,7 @@ tokens {
     DEDENT
 }
 
+
 @members {
     private java.util.LinkedList<Token> tokens = new java.util.LinkedList<>();
     private java.util.Stack<Integer> indents = new java.util.Stack<>();
@@ -23,6 +24,7 @@ tokens {
           tokens.remove(i);
         }
       }
+
       this.emit(commonToken(MyParser.NEWLINE, "\n"));
       while (!indents.isEmpty()) {
         this.emit(createDedent());
@@ -105,6 +107,7 @@ STRING: SHORT_STRING | LONG_STRING;
 NUMBER: INTEGER | FLOAT_NUMBER ;
 
 
+
 AND        : 'and';
 AS         : 'as';
 DEF        : 'def';
@@ -179,6 +182,8 @@ IDIV_ASSIGN        : '//=';
 
 NAME : [a-zA-Z_] ([a-zA-Z_0-9])* ;
 SKIP_: ( SPACES | COMMENT | LINE_JOINING) -> skip;
+UNKNOWN_CHAR: .;
+
 
 INVALID_NAME
     : DIGIT+ [a-zA-Z_] [a-zA-Z_0-9]*
@@ -191,6 +196,7 @@ INVALID_NAME
 
 fragment FLOAT_NUMBER:(DIGIT+)? DOT DIGIT+|DIGIT+DOT;
 fragment INTEGER:([1-9] DIGIT*) | '0'+;
+
 fragment SHORT_STRING:
     '\'' (STRING_ESCAPE_SEQ | ~[\\\r\n\f'])* '\''
     | '"' ( STRING_ESCAPE_SEQ | ~[\\\r\n\f"])* '"'
