@@ -3,23 +3,23 @@ options {
     tokenVocab = MyLexer;
 }
 
-input
-    : (single_statement | compound_stmt | decorated | NEWLINE)+ EOF
+program
+    : (simple_statements | compound_statements | decorated | NEWLINE)* EOF
     ;
 
-stmt
-    : single_statement
-    | compound_stmt
+statements
+    : simple_statements
+    | compound_statements
     ;
 
-single_statement
-    : simple_statement (SEMI_COLON simple_statement)* NEWLINE?
+simple_statements
+    : simple_statement ((SEMI_COLON simple_statement)* | SEMI_COLON?) NEWLINE?
     ;
 
 simple_statement
-    : expr_stmt
-    | import_stat
-    | flow_stmt
+    : expression_statement
+    | import_statement
+    | flow_statement
     ;
 
 decorated
@@ -43,48 +43,56 @@ paramlist
      ;
 
 block
-     : single_statement
-     | NEWLINE INDENT stmt+ DEDENT
+     : simple_statements
+     | NEWLINE INDENT statements+ DEDENT
      ;
 
 
-flow_stmt
-    : return_stmt
-    | raise_stmt
+flow_statement
+    : return_statement
+    | raise_statement
     ;
 
-return_stmt
-    : RETURN testlist?
+return_statement
+    : RETURN expression?
     ;
 
-raise_stmt
+raise_statement
     : RAISE (test (FROM test)?)?
     ;
 
-compound_stmt
-    : if_stmt
-    | try_stmt
+compound_statements
+    : if_statement
+    | for_statement
+    | try_statement
     | funcdef
     ;
 
-if_stmt
+if_statement
     : IF test COLON block (ELIF test COLON block)* (ELSE COLON block)?
     ;
 
-try_stmt
-    : TRY COLON block (EXCEPT test? COLON block)+
+try_statement
+    : TRY COLON block (EXCEPT test COLON block)* (EXCEPT test? COLON block)
     ;
 
-import_stat
+for_statement
+    : FOR exprlist IN expression COLON block (ELSE COLON block)?
+    ;
+
+exprlist
+    : expr  (COMMA expr )* COMMA?
+    ;
+
+import_statement
     : import_name
-    |import_from
+    | import_from
     ;
 
 import_from
-    : (
-        FROM ((DOT | ELLIPSIS)* dotted_name | (DOT | ELLIPSIS)+) IMPORT (
-            STAR
-            | OPEN_PAREN import_as_names CLOSE_PAREN
+    : (//((DOT | ELLIPSIS)* dotted_name | (DOT | ELLIPSIS)+)
+        FROM dotted_name IMPORT (
+            OPEN_PAREN import_as_names CLOSE_PAREN
             | import_as_names
         )
     )
@@ -99,7 +107,7 @@ import_as_name
     ;
 
 import_name
-    : dotted_as_name (COMMA dotted_as_name)*
+    :IMPORT dotted_as_name (COMMA dotted_as_name)*
     ;
 
 dotted_as_name
@@ -110,21 +118,18 @@ dotted_name
     : NAME (DOT NAME)*
     ;
 
-expr_stmt
-    : testlist (ASSIGN testlist)*
+expression_statement
+    : expression (ASSIGN expression)*
     ;
 
-testlist
+expression
     : test (COMMA test)* COMMA?
     ;
 
 test
-    : or_test
-    ;
-
-or_test
     : and_test (OR and_test)*
     ;
+
 and_test
     : not_test (AND not_test)*
     ;
@@ -139,58 +144,40 @@ comparison
      ;
 
 comp_op
-     : LESS_THAN
-     | GREATER_THAN
-     | EQUALS
-     | GT_EQ
-     | LT_EQ
-     | NOT_EQ_1
-     | NOT_EQ_2
-     | IN
-     | NOT IN
-     | IS
-     | IS NOT
+     : LESS_THAN #LessThan
+     | GREATER_THAN #GreaterThan
+     | EQUALS #Equal
+     | GT_EQ #GreaterThanOrEqual
+     | LT_EQ #LessThanOrEqual
+     | NOT_EQ #NotEqual
+     | IN #In
+     | NOT IN #NotIn
+     | IS #Is
+     | IS NOT #IsNot
      ;
 
 expr
-     : atom_expr
-     ;
-atom_expr
     : atom trailer*
     ;
 
 atom
-    : OPEN_PAREN testlist_comp? CLOSE_PAREN
-    | OPEN_BRACK testlist_comp? CLOSE_BRACK
+    : OPEN_PAREN expression? CLOSE_PAREN
+    | OPEN_BRACK expression? CLOSE_BRACK
     | OPEN_BRACE dictmaker? CLOSE_BRACE
-    | NUMBER
-    | NAME
-    | STRING
-    | NONE
-    | TRUE
-    | FALSE
+    | value
     ;
 
-testlist_comp
-    : test (comp_for | (COMMA test)* COMMA?)
+value
+    : NUMBER  #Number
+    | NAME    #Name
+    | STRING  #String
+    | NONE    #None
+    | TRUE    #Bool
+    | FALSE   #Bool
     ;
 
-comp_iter
-    : comp_for
-    | comp_if
-    ;
 
-comp_for
-    :  FOR exprlist IN or_test comp_iter?
-    ;
 
-exprlist
-    : expr  (COMMA expr )* COMMA?
-    ;
-
-comp_if
-    : IF or_test comp_iter?
-    ;
 
 dictmaker
     : test COLON test (COMMA test COLON test)*
@@ -207,5 +194,5 @@ arglist
     ;
 
 argument
-    : test comp_for? | test ASSIGN test
+    : test (ASSIGN test)?
     ;

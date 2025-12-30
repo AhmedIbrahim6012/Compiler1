@@ -104,7 +104,7 @@ NEWLINE
  ;
 
 STRING: SHORT_STRING | LONG_STRING;
-NUMBER: INTEGER; //| FLOAT_NUMBER ;
+NUMBER: INTEGER | FLOAT_NUMBER ;
 
 
 
@@ -163,8 +163,7 @@ GREATER_THAN       : '>';
 EQUALS             : '==';
 GT_EQ              : '>=';
 LT_EQ              : '<=';
-NOT_EQ_1           : '<>';
-NOT_EQ_2           : '!=';
+NOT_EQ           : '!=';
 AT                 : '@';
 ARROW              : '->';
 ADD_ASSIGN         : '+=';
@@ -181,12 +180,19 @@ RIGHT_SHIFT_ASSIGN : '>>=';
 POWER_ASSIGN       : '**=';
 IDIV_ASSIGN        : '//=';
 
-
-
 NAME : [a-zA-Z_] ([a-zA-Z_0-9])* ;
 SKIP_: ( SPACES | COMMENT | LINE_JOINING) -> skip;
 UNKNOWN_CHAR: .;
 
+
+INVALID_NAME
+    : DIGIT+ [a-zA-Z_] [a-zA-Z_0-9]*
+      {
+        throw new RuntimeException(
+            "Invalid identifier: identifiers cannot start with a digit -> " + getText()
+        );
+      }
+    ;
 
 fragment FLOAT_NUMBER:(DIGIT+)? DOT DIGIT+|DIGIT+DOT;
 fragment INTEGER:([1-9] DIGIT*) | '0'+;
