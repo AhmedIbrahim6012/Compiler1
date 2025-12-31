@@ -11,53 +11,60 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        File dir = new File("products_app/static/css");
+        File dir = new File("products_app/templates/");
         if (!dir.exists() || !dir.isDirectory()) {
             System.err.println("Directory not found: " + dir.getAbsolutePath());
             return;
         }
+
         File[] files = dir.listFiles();
         if (files == null) {
             System.err.println("No files found in directory");
             return;
         }
+
         for (File file : files) {
 
             if (!file.isFile()) continue;
-            if (!file.getName().endsWith(".css")) continue;
+
+            boolean isCss  = file.getName().endsWith(".css");
+            boolean isHtml = file.getName().endsWith(".html");
+
+            if (!isCss && !isHtml) continue;
 
             System.out.println("\n==============================");
             System.out.println("Parsing file: " + file.getName());
 
-            // 1️⃣ CharStream
-            CharStream input = CharStreams.fromFileName(file.getAbsolutePath());
+            try {
+                // 1️⃣ CharStream
+                CharStream input = CharStreams.fromFileName(file.getAbsolutePath());
 
-            // 2️⃣ Lexer
-            Example lexer = new Example(input);
+                // 2️⃣ Lexer
+                Example lexer = new Example(input);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-            // 🔍 اطبع التوكنز (اختياري للتشخيص)
-            /*
-            Token t;
-            while ((t = lexer.nextToken()).getType() != Token.EOF) {
-                System.out.println(lexer.getVocabulary().getSymbolicName(t.getType())
-                        + " -> " + t.getText());
+                // 3️⃣ Parser
+                ExampleParser parser = new ExampleParser(tokens);
+                parser.removeErrorListeners();
+                parser.addErrorListener(new DiagnosticErrorListener());
+
+                ParseTree tree;
+
+                // 4️⃣ Entry rule حسب نوع الملف
+                if (isCss) {
+                    tree = parser.cssFile();
+                } else {
+                    tree = parser.htmlDocument();
+                }
+
+                // 5️⃣ طباعة Parse Tree
+                System.out.println("\n--- Parse Tree ---");
+                System.out.println(tree.toStringTree(parser));
+
+            } catch (Exception e) {
+                System.err.println("❌ Error parsing: " + file.getName());
+                e.printStackTrace();
             }
-            lexer.reset();
-            */
-
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-            // 3️⃣ Parser
-            ExampleParser parser = new ExampleParser(tokens);
-            parser.removeErrorListeners();
-            parser.addErrorListener(new DiagnosticErrorListener());
-
-            // 4️⃣ Entry rule (CSS)
-            ParseTree tree = parser.cssFile();
-
-            // 5️⃣ طباعة Parse Tree
-            System.out.println("\n--- Parse Tree ---");
-            System.out.println(tree.toStringTree(parser));
         }
     }
 }

@@ -16,7 +16,7 @@ CLOSE_STYLE: '</style>';
 OPEN_TAG: '<' -> pushMode(TAG_MODE);
 CLOSE_TAG: '</' -> pushMode(TAG_MODE);
 ENTITY: '&' [A-Za-z0-9#]+ ';' ;
-TEXT: ~[<\r\n]+ ;
+TEXT: ~[<{}\r\n:;]+ ;
 COMMENT:'<!--' .*? '-->' -> skip ;
 LBRACE_HTML: '{' ;
 WS: [ \t]+ -> skip;
