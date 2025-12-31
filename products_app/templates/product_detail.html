@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}{{ product.name }} Details{% endblock
+%} {% block content %}
+
+<div class="product-detail">
+  <div class="detail-image">
+    <img src="{{product.image}}" alt="{{ product.name }}" />
+  </div>
+
+  <div class="detail-info">
+    <h1 class="detail-name">{{ product.name }}</h1>
+
+    <div class="detail-price">
+      <span class="price-label">Price : </span>
+      <span class="price-value">{{product.price }} </span>
+    </div>
+
+    <div class="detail-description">
+      <h3>Description :</h3>
+      <p>{{ product.description }}</p>
+    </div>
+
+    <div class="product-meta">
+      <div class="meta-item">
+        <span class="meta-label">Product Id</span>
+        <span class="meta-value">#{{ product.id }}</span>
+      </div>
+    </div>
+
+    <div class="detail-actions">
+      <form
+        method="POST"
+        action="{{ url_for('delete_product', product_id=product.id) }}"
+        class="delete-form-inline"
+      >
+        <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+      </form>
+      <a href="{{ url_for('index') }}" class="btn btn-outline btn-lg"
+        >Back to home</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

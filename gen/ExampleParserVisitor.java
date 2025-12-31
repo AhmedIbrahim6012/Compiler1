@@ -1,6 +1,9 @@
 // Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/ExampleParser.g4 by ANTLR 4.13.2
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
+
+package antlr;  
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import antlr.ExampleParser;
 /**
  * This interface defines a complete generic visitor for a parse tree produced
  * by {@link ExampleParser}.
@@ -52,29 +55,23 @@ public interface ExampleParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinja2Rule(ExampleParser.Jinja2RuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExampleParser#styleElement}.
+	 * Visit a parse tree produced by {@link ExampleParser#cssFile}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStyleElement(ExampleParser.StyleElementContext ctx);
+	T visitCssFile(ExampleParser.CssFileContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExampleParser#cssStatement}.
+	 * Visit a parse tree produced by {@link ExampleParser#cssRule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCssStatement(ExampleParser.CssStatementContext ctx);
+	T visitCssRule(ExampleParser.CssRuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ExampleParser#atRule}.
+	 * Visit a parse tree produced by {@link ExampleParser#cssBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtRule(ExampleParser.AtRuleContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExampleParser#cssInnerBlock}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCssInnerBlock(ExampleParser.CssInnerBlockContext ctx);
+	T visitCssBlock(ExampleParser.CssBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExampleParser#cssDeclaration}.
 	 * @param ctx the parse tree
@@ -82,17 +79,17 @@ public interface ExampleParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCssDeclaration(ExampleParser.CssDeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ExampleParser#cssValueList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssValueList(ExampleParser.CssValueListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ExampleParser#cssValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCssValue(ExampleParser.CssValueContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ExampleParser#cssRule}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCssRule(ExampleParser.CssRuleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExampleParser#selectorList}.
 	 * @param ctx the parse tree

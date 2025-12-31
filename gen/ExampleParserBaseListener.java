@@ -1,9 +1,13 @@
 // Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/ExampleParser.g4 by ANTLR 4.13.2
 
+
+package antlr;  
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import antlr.ExampleParser;
+import antlr.ExampleParserListener;
 /**
  * This class provides an empty implementation of {@link ExampleParserListener},
  * which can be extended to create a listener which only needs to handle a subset
@@ -100,49 +104,37 @@ public class ExampleParserBaseListener implements ExampleParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStyleElement(ExampleParser.StyleElementContext ctx) { }
+	@Override public void enterCssFile(ExampleParser.CssFileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStyleElement(ExampleParser.StyleElementContext ctx) { }
+	@Override public void exitCssFile(ExampleParser.CssFileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCssStatement(ExampleParser.CssStatementContext ctx) { }
+	@Override public void enterCssRule(ExampleParser.CssRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCssStatement(ExampleParser.CssStatementContext ctx) { }
+	@Override public void exitCssRule(ExampleParser.CssRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAtRule(ExampleParser.AtRuleContext ctx) { }
+	@Override public void enterCssBlock(ExampleParser.CssBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAtRule(ExampleParser.AtRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCssInnerBlock(ExampleParser.CssInnerBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCssInnerBlock(ExampleParser.CssInnerBlockContext ctx) { }
+	@Override public void exitCssBlock(ExampleParser.CssBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -160,6 +152,18 @@ public class ExampleParserBaseListener implements ExampleParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCssValueList(ExampleParser.CssValueListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCssValueList(ExampleParser.CssValueListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCssValue(ExampleParser.CssValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -167,18 +171,6 @@ public class ExampleParserBaseListener implements ExampleParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCssValue(ExampleParser.CssValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCssRule(ExampleParser.CssRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCssRule(ExampleParser.CssRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

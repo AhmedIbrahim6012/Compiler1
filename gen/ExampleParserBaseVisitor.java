@@ -1,6 +1,9 @@
 // Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/ExampleParser.g4 by ANTLR 4.13.2
-import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
+
+package antlr;  
+import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import antlr.ExampleParser;
 /**
  * This class provides an empty implementation of {@link ExampleParserVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
@@ -10,7 +13,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 @SuppressWarnings("CheckReturnValue")
-public class ExampleParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements ExampleParserVisitor<T> {
+public class ExampleParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements antlr.ExampleParserVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -66,28 +69,21 @@ public class ExampleParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStyleElement(ExampleParser.StyleElementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCssFile(ExampleParser.CssFileContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCssStatement(ExampleParser.CssStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCssRule(ExampleParser.CssRuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtRule(ExampleParser.AtRuleContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitCssInnerBlock(ExampleParser.CssInnerBlockContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCssBlock(ExampleParser.CssBlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -101,14 +97,14 @@ public class ExampleParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCssValue(ExampleParser.CssValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCssValueList(ExampleParser.CssValueListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCssRule(ExampleParser.CssRuleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCssValue(ExampleParser.CssValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
