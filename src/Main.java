@@ -11,20 +11,16 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        File dir = new File("products_app/static/css/");
-
-        // ✅ حماية من null
+        File dir = new File("products_app/static/css");
         if (!dir.exists() || !dir.isDirectory()) {
             System.err.println("Directory not found: " + dir.getAbsolutePath());
             return;
         }
-
         File[] files = dir.listFiles();
         if (files == null) {
             System.err.println("No files found in directory");
             return;
         }
-
         for (File file : files) {
 
             if (!file.isFile()) continue;

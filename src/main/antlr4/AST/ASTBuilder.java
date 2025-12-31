@@ -62,9 +62,9 @@ public class ASTBuilder extends antlr.ExampleParserBaseVisitor<ASTNode> {
         }
 
         // STYLE element
-//        if (ctx.styleElement() != null) {
-//            return visit(ctx.styleElement());
-//        }
+        if (ctx.styleElement() != null) {
+            return visit(ctx.styleElement());
+        }
 
         // EXPRESSION, STATEMENT, LBRACE_HTML… (إذا بدك تعالجهم لاحقاً)
         return null;
@@ -100,16 +100,16 @@ public class ASTBuilder extends antlr.ExampleParserBaseVisitor<ASTNode> {
     // -----------------------------
     // CSS
     // -----------------------------
-//    @Override
-//    public ASTNode visitStyleElement(ExampleParser.StyleElementContext ctx) {
-//        StyleElementNode style =
-//                new StyleElementNode(ctx.getStart().getLine());
-//
-//        for (ExampleParser.CssStatementContext st : ctx.cssStatement()) {
-//            style.addChild(visit(st));
-//        }
-//        return style;
-//    }
+    @Override
+    public ASTNode visitStyleElement(ExampleParser.StyleElementContext ctx) {
+        StyleElementNode style =
+                new StyleElementNode(ctx.getStart().getLine());
+
+        for (ExampleParser.CssStatementContext st : ctx.cssStatement()) {
+            style.addChild(visit(st));
+        }
+        return style;
+    }
 
     @Override
     public ASTNode visitCssRule(ExampleParser.CssRuleContext ctx) {

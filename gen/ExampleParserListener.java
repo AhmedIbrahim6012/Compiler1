@@ -1,7 +1,7 @@
 // Generated from C:/Users/Lenovo/IdeaProjects/Antlr/src/main/antlr4/ExampleParser.g4 by ANTLR 4.13.2
 
 
-package antlr;  
+package antlr;      
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 import antlr.ExampleParser;
 /**
@@ -19,6 +19,16 @@ public interface ExampleParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHtmlDocument(ExampleParser.HtmlDocumentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExampleParser#cssFile}.
+	 * @param ctx the parse tree
+	 */
+	void enterCssFile(ExampleParser.CssFileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExampleParser#cssFile}.
+	 * @param ctx the parse tree
+	 */
+	void exitCssFile(ExampleParser.CssFileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExampleParser#doctype}.
 	 * @param ctx the parse tree
@@ -80,35 +90,45 @@ public interface ExampleParserListener extends ParseTreeListener {
 	 */
 	void exitJinja2Rule(ExampleParser.Jinja2RuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExampleParser#cssFile}.
+	 * Enter a parse tree produced by {@link ExampleParser#styleElement}.
 	 * @param ctx the parse tree
 	 */
-	void enterCssFile(ExampleParser.CssFileContext ctx);
+	void enterStyleElement(ExampleParser.StyleElementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExampleParser#cssFile}.
+	 * Exit a parse tree produced by {@link ExampleParser#styleElement}.
 	 * @param ctx the parse tree
 	 */
-	void exitCssFile(ExampleParser.CssFileContext ctx);
+	void exitStyleElement(ExampleParser.StyleElementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExampleParser#cssRule}.
+	 * Enter a parse tree produced by {@link ExampleParser#cssStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterCssRule(ExampleParser.CssRuleContext ctx);
+	void enterCssStatement(ExampleParser.CssStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExampleParser#cssRule}.
+	 * Exit a parse tree produced by {@link ExampleParser#cssStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitCssRule(ExampleParser.CssRuleContext ctx);
+	void exitCssStatement(ExampleParser.CssStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExampleParser#cssBlock}.
+	 * Enter a parse tree produced by {@link ExampleParser#atRule}.
 	 * @param ctx the parse tree
 	 */
-	void enterCssBlock(ExampleParser.CssBlockContext ctx);
+	void enterAtRule(ExampleParser.AtRuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ExampleParser#cssBlock}.
+	 * Exit a parse tree produced by {@link ExampleParser#atRule}.
 	 * @param ctx the parse tree
 	 */
-	void exitCssBlock(ExampleParser.CssBlockContext ctx);
+	void exitAtRule(ExampleParser.AtRuleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExampleParser#cssInnerBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterCssInnerBlock(ExampleParser.CssInnerBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExampleParser#cssInnerBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitCssInnerBlock(ExampleParser.CssInnerBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExampleParser#cssDeclaration}.
 	 * @param ctx the parse tree
@@ -120,16 +140,6 @@ public interface ExampleParserListener extends ParseTreeListener {
 	 */
 	void exitCssDeclaration(ExampleParser.CssDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ExampleParser#cssValueList}.
-	 * @param ctx the parse tree
-	 */
-	void enterCssValueList(ExampleParser.CssValueListContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ExampleParser#cssValueList}.
-	 * @param ctx the parse tree
-	 */
-	void exitCssValueList(ExampleParser.CssValueListContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ExampleParser#cssValue}.
 	 * @param ctx the parse tree
 	 */
@@ -139,6 +149,16 @@ public interface ExampleParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCssValue(ExampleParser.CssValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExampleParser#cssRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterCssRule(ExampleParser.CssRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExampleParser#cssRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitCssRule(ExampleParser.CssRuleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExampleParser#selectorList}.
 	 * @param ctx the parse tree
