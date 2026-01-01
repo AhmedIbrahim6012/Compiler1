@@ -45,6 +45,7 @@ public class AstPrinter implements AstVisitor<Void> {
     @Override
     public Void visitDoctype(DoctypeNode node) {
         print(node);
+        visitChildren(node);
         return null;
     }
 

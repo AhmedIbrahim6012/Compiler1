@@ -1,8 +1,12 @@
 parser grammar ExampleParser;
 
-options { tokenVocab = FrontLexer;}
+@header {
+
+package antlr;      }
+options { tokenVocab = Example;}
 
 htmlDocument:element* doctype? element* EOF;
+cssFile: cssStatement* EOF;
 doctype: DOCTYPE;
 element:
     // jinja2Element
@@ -41,6 +45,8 @@ element:
         : cssDeclaration* LBRACE (cssStatement | cssDeclaration)* RBRACE;
     cssDeclaration
         : IDENT COLON cssValue+ SEMICOLON
+        |IDENT
+        |COLON IDENT
         | IDENT COLON cssValue+
         | IDENT COLON cssValue+ (COMMA cssValue+)+ SEMICOLON;
     cssValue
