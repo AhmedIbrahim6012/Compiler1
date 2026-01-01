@@ -2,9 +2,9 @@ package AST;
 
 import java.util.List;
 
-public class SimpleStatements extends  ASTNode {
+public class SimpleStatementsNode extends  ASTNode {
    public final List<SimpleStatementNode> statements;
-    public SimpleStatements(List<SimpleStatementNode> statements) {
+    public SimpleStatementsNode(List<SimpleStatementNode> statements) {
         super(1,"");
         this.statements = statements;
     }

@@ -21,7 +21,7 @@ public class ASTVisitor extends MyParserBaseVisitor<ASTNode> {
         for (int i = 0; i < ctx.simple_statement().size(); i++) {
             statements.add(new SimpleStatementVisitor().visit(ctx.simple_statement(i)));
         }
-        return new SimpleStatements(statements);
+        return new SimpleStatementsNode(statements);
     }
 
     @Override

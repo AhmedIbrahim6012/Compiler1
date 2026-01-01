@@ -1,4 +1,4 @@
-lexer grammar Example;
+lexer grammar FrontLexer;
 
 
 

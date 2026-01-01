@@ -1,6 +1,6 @@
 parser grammar ExampleParser;
 
-options { tokenVocab = Example;}
+options { tokenVocab = FrontLexer;}
 
 htmlDocument:element* doctype? element* EOF;
 doctype: DOCTYPE;

@@ -165,20 +165,7 @@ GT_EQ              : '>=';
 LT_EQ              : '<=';
 NOT_EQ           : '!=';
 AT                 : '@';
-ARROW              : '->';
-ADD_ASSIGN         : '+=';
-SUB_ASSIGN         : '-=';
-MULT_ASSIGN        : '*=';
-AT_ASSIGN          : '@=';
-DIV_ASSIGN         : '/=';
-MOD_ASSIGN         : '%=';
-AND_ASSIGN         : '&=';
-OR_ASSIGN          : '|=';
-XOR_ASSIGN         : '^=';
-LEFT_SHIFT_ASSIGN  : '<<=';
-RIGHT_SHIFT_ASSIGN : '>>=';
-POWER_ASSIGN       : '**=';
-IDIV_ASSIGN        : '//=';
+
 
 NAME : [a-zA-Z_] ([a-zA-Z_0-9])* ;
 SKIP_: ( SPACES | COMMENT | LINE_JOINING) -> skip;

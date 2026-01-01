@@ -153,9 +153,7 @@ public class ExpressionNodeVisitor extends MyParserBaseVisitor<ExpressionNode> {
             }
             return visit(ctx.dictmaker());
         } else {
-           AtomNode atom = (new AtomVisitor()).visit(ctx);
-         return new LiteralExpressionNode(ctx.start.getLine(), atom);
-
+         return (new AtomVisitor()).visit(ctx);
         }
     }
 
