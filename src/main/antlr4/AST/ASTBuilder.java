@@ -1,26 +1,78 @@
 package AST;
+import antlr.ExampleParser;
 
-import Example.ExampleParser;
-import Example.ExampleParserBaseVisitor;
 
-public class ASTBuilder extends ExampleParserBaseVisitor<ASTNode> {
+
+public class ASTBuilder extends antlr.ExampleParserBaseVisitor<ASTNode> {
 
     @Override
-    public ASTNode visitDoctype(ExampleParser.HtmlDocumentContext ctx) {
-        DoctypeNode doc = new DoctypeNode(ctx.getStart().getLine());
+    public ASTNode visitHtmlDocument(ExampleParser.HtmlDocumentContext ctx) {
+
+        // إذا في doctype → خليه root
+        DoctypeNode root;
 
         if (ctx.doctype() != null) {
-            doc.addChild(visit(ctx.doctype()));
+            root = new DoctypeNode(
+                    ctx.doctype().getText(),
+                    ctx.getStart().getLine()
+            );
+        } else {
+            // في حال ما في doctype
+            root = new DoctypeNode("NO_DOCTYPE", ctx.getStart().getLine());
         }
 
+        // كل العناصر (html, body, text, style...)
         for (ExampleParser.ElementContext el : ctx.element()) {
-            ASTNode node = visit(el);
-            if (node != null)
-                doc.addChild(node);
+            ASTNode child = visit(el);
+            if (child != null) {
+                root.addChild(child);
+            }
         }
 
+        return root;
+    }
+
+
+
+    @Override
+    public ASTNode visitDoctype(ExampleParser.DoctypeContext ctx) {
+        DoctypeNode doc = new DoctypeNode(ctx.DOCTYPE().getText(),ctx.getStart().getLine());
+        if (ctx.DOCTYPE() != null) { doc.addChild(visit(ctx.DOCTYPE())); }
+        for (ExampleParser.ElementContext el : ctx.element())
+            { ASTNode node = visit(el); if (node != null) doc.addChild(node); }
         return doc;
     }
+
+    @Override
+    public ASTNode visitElement(ExampleParser.ElementContext ctx) {
+
+        // TEXT token
+        if (ctx.TEXT() != null) {
+            return new TextNode(ctx.TEXT().getText(), ctx.getStart().getLine());
+        }
+
+        // ENTITY token
+        if (ctx.ENTITY() != null) {
+            return new EntityNode(ctx.ENTITY().getText(), ctx.getStart().getLine());
+        }
+
+        // HTML element
+        if (ctx.htmlElement() != null) {
+            return visit(ctx.htmlElement());
+        }
+
+        // STYLE element
+        if (ctx.styleElement() != null) {
+            return visit(ctx.styleElement());
+        }
+
+        // EXPRESSION, STATEMENT, LBRACE_HTML… (إذا بدك تعالجهم لاحقاً)
+        return null;
+    }
+
+    // -----------------------------
+    // HTML ELEMENT
+    // -----------------------------
     @Override
     public ASTNode visitHtmlElement(ExampleParser.HtmlElementContext ctx) {
         HtmlElementNode node =
@@ -32,7 +84,7 @@ public class ASTBuilder extends ExampleParserBaseVisitor<ASTNode> {
             node.addChild(visit(a));
         }
 
-        // children elements
+        // children
         for (ExampleParser.ElementContext e : ctx.element()) {
             node.addChild(visit(e));
         }
@@ -45,17 +97,9 @@ public class ASTBuilder extends ExampleParserBaseVisitor<ASTNode> {
         return new HtmlAttributeNode(ctx.getText(), ctx.getStart().getLine());
     }
 
-    @Override
-    public ASTNode visitText(ExampleParser.TextContext ctx) {
-        return new TextNode(ctx.getText(), ctx.getStart().getLine());
-    }
-
-    @Override
-    public ASTNode visitEntity(ExampleParser.EntityContext ctx) {
-        return new EntityNode(ctx.getText(), ctx.getStart().getLine());
-    }
-
+    // -----------------------------
     // CSS
+    // -----------------------------
     @Override
     public ASTNode visitStyleElement(ExampleParser.StyleElementContext ctx) {
         StyleElementNode style =
@@ -72,9 +116,9 @@ public class ASTBuilder extends ExampleParserBaseVisitor<ASTNode> {
         return new CssRuleNode(ctx.getStart().getLine());
     }
 
-    @Override
-    public ASTNode visitAtRule(ExampleParser.AtRuleContext ctx) {
-        return new CssAtRuleNode(ctx.IDENT().getText(),
-                ctx.getStart().getLine());
-    }
+//    @Override
+//    public ASTNode visitAtRule(ExampleParser.AtRuleContext ctx) {
+//        return new CssAtRuleNode(ctx.IDENT().getText(),
+//                ctx.getStart().getLine());
+//    }
 }

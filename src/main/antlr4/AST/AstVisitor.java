@@ -8,6 +8,7 @@ public interface AstVisitor<R> {
     R visitEntity(EntityNode node);
     R visitDoctype(DoctypeNode node);
 
+
     //css
     R visitCssStylesheet(StyleElementNode node);
     R visitCssRule(CssRuleNode node);
