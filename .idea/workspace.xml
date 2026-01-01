@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="add AST and Visitor">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Example.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Example.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/Example.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParser.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParser.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParserBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParserBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParserListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/ExampleParserVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParser.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParser.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParserBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParserBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParserListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLang/MyParserVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexerPython.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexerPython.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/MyLexerPython.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-    </list>
+    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="add AST and Visitor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,12 +35,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="Ahmed" />
-                    <option name="lastUsedInstant" value="1767073891" />
+                    <option name="branchName" value="lilas" />
+                    <option name="lastUsedInstant" value="1767255354" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="hammoud" />
-                    <option name="lastUsedInstant" value="1767073890" />
+                    <option name="lastUsedInstant" value="1767082513" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Ahmed" />
+                    <option name="lastUsedInstant" value="1767073891" />
                   </RecentBranch>
                 </list>
               </option>
@@ -105,6 +74,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.App.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.Project1 [org.antlr:antlr4-maven-plugin:4.13.2:antlr4].executor": "Run",
     "Maven.Project1 [org.antlr:antlr4-maven-plugin:4.9.3:antlr4].executor": "Run",
@@ -122,12 +92,6 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="App" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="MyFirstProject" />
       <method v="2">
