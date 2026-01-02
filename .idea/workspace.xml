@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="edit lexer1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+=======
+    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/MyParser.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Python3LexerBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Python3ParserBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+>>>>>>> dc5dd1d82f1587442b4fe0708a719edd35b85bb1
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,27 +30,68 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AhmedIbrahim6012/Compiler1.git&quot;,
     &quot;accountId&quot;: &quot;d27dd03e-0a00-4da7-95e7-c6368b24dd27&quot;
   }
 }</component>
+=======
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1765717605" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AhmedIbrahim6012/Compiler1&quot;,
+    &quot;accountId&quot;: &quot;23b30aa1-8c1c-42ca-8873-97565d6044dd&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/Visitor/ExpressionNodeVisitor.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+>>>>>>> dc5dd1d82f1587442b4fe0708a719edd35b85bb1
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="35q9OHLOjvLy5JVXIfZcVoPTyBz" />
+<<<<<<< HEAD
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+=======
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+>>>>>>> dc5dd1d82f1587442b4fe0708a719edd35b85bb1
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
@@ -52,8 +106,26 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/CompilerProjects/MyFirstProject",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.NewCompiler [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.NewCompiler [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Project1 [org.antlr:antlr4-maven-plugin:4.13.2:antlr4].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Project1 [org.antlr:antlr4-maven-plugin:4.9.3:antlr4].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hammoud&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/CompilerProjects/MyFirstProject&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+>>>>>>> dc5dd1d82f1587442b4fe0708a719edd35b85bb1
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="MyFirstProject" />
@@ -79,6 +151,7 @@
       <option name="presentableId" value="Default" />
       <updated>1763826707442</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL؜-٠٠٠٠١" summary="edit lexer">
       <option name="closed" value="true" />
       <created>1765456712213</created>
@@ -110,5 +183,28 @@
     <MESSAGE value="edit lexer" />
     <MESSAGE value="edit lexer1" />
     <option name="LAST_COMMIT_MESSAGE" value="edit lexer1" />
+=======
+    <task id="LOCAL-00001" summary="New Commit">
+      <option name="closed" value="true" />
+      <created>1766470070591</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766470070591</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> dc5dd1d82f1587442b4fe0708a719edd35b85bb1
   </component>
 </project>
