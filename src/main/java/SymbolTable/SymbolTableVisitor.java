@@ -1,10 +1,13 @@
 package SymbolTable;
 
-import AST.*;
-import AST.ExpressionStatement.*;
-import AST.ExpressionStatement.Atoms.NameAtomNode;
-import AST.FlowStatement.RaiseStatementNode;
-import AST.FlowStatement.ReturnStatementNode;
+import Back.AST.*;
+import Back.AST.ExpressionStatement.AssignmentStatement;
+import Back.AST.ExpressionStatement.Atoms.NameAtomNode;
+import Back.AST.ExpressionStatement.CallExpressionNode;
+import Back.AST.ExpressionStatement.ExpressionNode;
+import Back.AST.ExpressionStatement.ExpressionStatementNode;
+import Back.AST.FlowStatement.RaiseStatementNode;
+import Back.AST.FlowStatement.ReturnStatementNode;
 
 public class SymbolTableVisitor {
     private final SymbolTable symbolTable;

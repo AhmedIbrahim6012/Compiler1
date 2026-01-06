@@ -19,11 +19,6 @@ public class SymbolTable {
         }
     }
     public void addSymbol(String name,Type type,int line) {
-//        if (scopes.peek().containsKey(name)) {
-//            throw new RuntimeException(
-//                    "Symbol already defined: " + name+" at line "
-//            );
-//        }
         scopes.peek().put(name,new Symbol(name,line,type));
     }
     public void lookup(String name,int line) {

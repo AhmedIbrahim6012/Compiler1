@@ -1,0 +1,12 @@
+package Back.AST.ImporStatement;
+import Back.AST.ASTNode;
+
+public abstract class ImportNode extends ASTNode {
+    public ImportNode(int line, String name) {
+        super(line, name);
+    }
+    @Override
+    public void printTree(int indent){
+        super.printTree(indent);
+    }
+}

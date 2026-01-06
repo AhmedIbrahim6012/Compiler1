@@ -1,10 +1,76 @@
-def print(i):
- return i;
- if(true):
-    x=4
- a=4
-
-
-
-
-
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Main - Product Store App</title>
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+      />
+    </head>
+    <body>
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-brand">
+            <a href="{{ url_for('index') }}">Product Store</a>
+          </div>
+          <ul class="nav-menu">
+            <li>
+              <a href="{{ url_for('add_product') }}" class="nav-link btn-add"
+                >Add Product</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        {% if products %}
+        <div class="full-state">
+          <div>
+            <h2>Available Product</h2>
+            <p class="subtitle">Choose an produuct to show its details</p>
+          </div>
+          <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+              <div class="product-image">
+                <img src="{{product.image}}" alt="{{ product.name }}" />
+              </div>
+              <div class="product-info">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-price">{{product.price }}</p>
+              </div>
+              <div class="product-actions">
+                <a
+                  href="{{ url_for('product_detail', product_id=product.id) }}"
+                  class="btn btn-primary"
+                  >Details</a
+                >
+                <form
+                  method="POST"
+                  action="{{ url_for('delete_product', product_id=product.id) }}"
+                  class="delete-form"
+                >
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <h1>Hammoud</h1>
+        {% else %}
+        <div class="empty-state">
+          <h2>Not Found Products</h2>
+          <a href="{{ url_for('add_product') }}" class="btn btn-primary"
+            >Add First Product</a
+          >
+        </div>
+        {% endif %}
+      </div>
+      <footer class="footer">
+        <p>&copy; Product Store App. All rights reserved 2025</p>
+      </footer>
+    </body>
+  </html>
