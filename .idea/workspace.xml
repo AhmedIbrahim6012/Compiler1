@@ -5,111 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="add AST and Visitor">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Front/AST/ASTNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/ASTBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/ASTNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/AstPrinter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/AstVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssAtRuleNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssDeclarationNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssInnerBlockNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssRuleNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssSelectorNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/CssValueNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/DoctypeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Front/AST/Html/DoctypeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/EntityNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Front/AST/Html/EntityNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/HtmlAttributeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Front/AST/Html/HtmlAttributeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/HtmlElementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Front/AST/Html/HtmlElementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/JinjaExpressionNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/JinjaStatementNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/StyleElementNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/TextNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/AST/programe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Front/AST/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/FontLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/FrontLexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/FrontParser.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyLexer.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/BackLexer.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/MyParser.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/BackParser.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/Example.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/Example.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/Example.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/antlr4/gen/MyLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/A.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ASTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ASTNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/BlockNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/BlockNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/CompoundStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/CompoundStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/DecoratorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/DecoratorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/ArgumentsExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/ArgumentsExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/AssignmentStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/AssignmentStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/AtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/AtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/BoolAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/BoolAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/DoubleNumberAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/DoubleNumberAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/IntNumberAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/IntNumberAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/NameAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/NameAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/NoneAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/NoneAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Atoms/StringAtomNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Atoms/StringAtomNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/AttributeExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/AttributeExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/BinaryExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/BinaryExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/CallExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/CallExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/CompareExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/CompareExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/DictionaryExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/DictionaryExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/ExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/ExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/ExpressionStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/ExpressionStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/IndexExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/IndexExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/ListExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/ListExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/LiteralExpressionNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/AndOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/AndOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/EqualOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/EqualOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/GreaterThanOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/GreaterThanOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/GreaterThanOrEqualOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/GreaterThanOrEqualOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/InOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/InOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/IsNotOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/IsNotOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/IsOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/IsOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/LessThanOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/LessThanOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/LessThanOrEqualOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/LessThanOrEqualOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/NotEqualOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/NotEqualOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/NotInOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/NotInOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/NotOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/NotOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/OperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/OperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/Operators/OrOperatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/Operators/OrOperatorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/TupleExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/TupleExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ExpressionStatement/UnaryExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ExpressionStatement/UnaryExpressionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/FlowStatement/FlowStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/FlowStatement/FlowStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/FlowStatement/RaiseStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/FlowStatement/RaiseStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/FlowStatement/ReturnStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/FlowStatement/ReturnStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ForStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ForStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/FunctionDefNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/FunctionDefNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/IfStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/IfStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/DottedAsNameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/DottedAsNameNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/DottedNameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/DottedNameNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/ImportAsNameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/ImportAsNameNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/ImportFromNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/ImportFromNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/ImportNameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/ImportNameNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/ImportNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/ImportNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/ImporStatement/ImportStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/ImporStatement/ImportStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/SimpleStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/SimpleStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/SimpleStatementsNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/SimpleStatementsNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AST/TryStatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/AST/TryStatementNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/AtomVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/AtomVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/CompoundStatementVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/CompoundStatementVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/ExpressionNodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ExpressionNodeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/FlowStatementVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/FlowStatementVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/ImportNodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ImportNodeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/ImportStatementVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ImportStatementVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/OperatorVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/OperatorVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/ProgramVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ProgramVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Visitor/SimpleStatementVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/SimpleStatementVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +38,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1767711957" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="hammoud" />
                     <option name="lastUsedInstant" value="1767082513" />
@@ -189,7 +90,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "hammoud",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "H:/Compiler Projects/NewCompiler/src/main/java/Front/Visitor",
     "project.structure.last.edited": "Project",
