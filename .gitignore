@@ -20,6 +20,16 @@ src/main/antlr4/PythonParser.g4
 src/main/antlr4/Test.g4
 src/main/antlr4/MyPythonLexer.g4
 src/main/antlr4/MyPythonParser.g4
+src/main/java/Back/AST/app.puml
+src/main/java/Back/Visitor/backVisitor.puml
+src/main/java/Front/Visitor/frontVisitor.puml
+src/main/java/Front/AST/front.puml
+
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.kotlin
 
 ### Eclipse ###
 .apt_generated
@@ -29,6 +39,10 @@ src/main/antlr4/MyPythonParser.g4
 .settings
 .springBeans
 .sts4-cache
+
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/

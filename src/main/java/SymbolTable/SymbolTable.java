@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class SymbolTable {
-    private Stack<Map<String, Type>> scopes;
+    private Stack<Map<String, Symbol>> scopes;
     public SymbolTable() {
         scopes = new Stack<>();
         enterScope();
@@ -18,20 +18,18 @@ public class SymbolTable {
             scopes.pop();
         }
     }
-    public void addSymbol(String name,Type type) {
-        if (scopes.peek().containsKey(name)) {
-            throw new RuntimeException(
-                    "Symbol already defined: " + name
-            );
-        }
-        scopes.peek().put(name,type);    }
-    public String lookup(String name) {
+    public void addSymbol(String name,Type type,int line) {
+        scopes.peek().put(name,new Symbol(name,line,type));
+    }
+    public void lookup(String name,int line) {
         for (int i = scopes.size() - 1; i >= 0; i--) {
-            Type type = scopes.get(i).get(name);
-            if (type != null) {
-                return name;
+            Symbol symbol = scopes.get(i).get(name);
+            if (symbol != null) {
+                return;
             }
         }
-        return null;
+        throw new RuntimeException(
+                "Symbol : " + name+"  not defined!"+" at line  "+line
+        );
     }
 }
