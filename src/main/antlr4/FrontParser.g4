@@ -2,25 +2,21 @@ parser grammar FrontParser;
 
 options { tokenVocab = FrontLexer;}
 
-program
-    : htmlDocument
-    | cssFile
-    ;
 htmlDocument
-    : doctype? element* EOF;
+    : doctype element* EOF;
 
 
-doctype: DOCTYPE;
+doctype: DOCTYPE?;
 
 element
-    : htmlElement
-    | jinja2Rule
-    | styleElement
-    | ENTITY
-    | TEXT
-    | IDENT
-    | NUMBER
+    : htmlElement #HtmlElementNode
+    | jinja2Rule #Jinja2Node
+    | styleElement #StyleElementNode
+    | ENTITY #EntityNode
+    | HTML_TEXT #HtmlTextNode
+    | IDENT #IdentNode
     ;
+
     htmlElement
         : OPEN_TAG TAG_NAME attribute* TAG_CLOSE element* CLOSE_TAG TAG_NAME TAG_CLOSE
         | OPEN_TAG TAG_NAME attribute* SELF_CLOSE
@@ -31,52 +27,76 @@ element
         ;
 
     attributeValue
-        : TAG_STRING
-        | UNQUOTED_VALUE
+        : doubleQuotedAttribute #DoubleQuotedAttributeNode
+        | singleQuotedAttribute #SingleQuotedAttributeNode
+        | UNQUOTED_VALUE #UnquotedValueNode
         ;
 
-    cssFile
-        : cssStatement* EOF;
+    doubleQuotedAttribute
+        : TAG_QUOTE_OPEN doubleAttrContent* TAG_QUOTE_CLOSE
+        ;
+
+    singleQuotedAttribute
+       : TAG_SINGLE_QUOTE_OPEN singleAttrContent* TAG_SINGLE_QUOTE_CLOSE
+       ;
+
+    singleAttrContent
+       : TAG_ATTR_TEXT_S #SingleAttrText
+       | TAG_JINJA_EXPR_S expression JINJA_EXPR_END #SingleAttrJinjaExpr
+       | TAG_JINJA_STMT_S jinjaStatement JINJA_STMT_END #SingleAttrJinjaStmt
+       ;
+
+    doubleAttrContent
+        : TAG_ATTR_TEXT_D #DoubleAttrText
+        | TAG_JINJA_EXPR_D expression JINJA_EXPR_END #DoubleAttrJinjaExpr
+        | TAG_JINJA_STMT_D jinjaStatement JINJA_STMT_END #DoubleAttrJinjaStmt
+        ;
 
 
     styleElement: OPEN_STYLE cssStatement* CLOSE_STYLE;
 
     cssStatement
-        : cssRule
-        | atRule
+        : cssRule #CSSRuleNode
+        | atRule #ATRuleNode
         ;
 
-    atRule: AT_KEYFRAMES IDENT LBRACE keyframeBlock+ RBRACE;
+    atRule
+       : atMedia #ATMediaNode
+       ;
 
-    keyframeBlock
-        : keyframeSelector LBRACE cssDeclaration* RBRACE
+    atMedia
+        : AT_MEDIA mediaQuery LBRACE cssRule* RBRACE
         ;
 
-    keyframeSelector
-        : FROM
-        | TO
+    mediaQuery
+        : OPEN_PARE CSS_IDENT CSS_COLON mediaValue CLOSE_PARE
+        ;
+
+    mediaValue
+        : CSS_NUMBER UNIT? #MediaNumberNode
+        | CSS_IDENT #MediaNameNode
         ;
 
     cssDeclaration
-        : property  COLON cssValue+ (COMMA cssValue+)* SEMICOLON
+        : property  CSS_COLON cssValue+ (CSS_COMMA cssValue+)* CSS_SEMICOLON
         ;
 
     property
-        : IDENT
-        | variableDeff
+        : CSS_IDENT #PropertyNameNode
+        | variableDeff #VariableDeffNode
         ;
     variableDeff
-        :VARIABLE_DASH IDENT
+        :VARIABLE_DASH CSS_IDENT
         ;
 
     cssValue
-        : NUMBER UNIT? #NumberUnit
-        | COLOR_HEX #Color
-        | STRING #String
-        | KEYWORD #Keyword
-        | IDENT #Name
-        | variableDeff #Variable
-        | function #CallFunction
+        : CSS_NUMBER UNIT? #NumberCSSNode
+        | COLOR_HEX #ColorCSSNode
+        | CSS_STRING #StringCSSNode
+        | KEYWORD #KeywordCSSNode
+        | variableDeff #VariableCSSNode
+        | function #CallFunctionCSSNode
+        | CSS_IDENT #NameCSSNode
         ;
 
     cssRule
@@ -84,30 +104,39 @@ element
         ;
 
     function
-        : IDENT OPEN_PARE cssValue+ (COMMA cssValue+)* CLOSE_PARE
+        : CSS_IDENT OPEN_PARE cssValue (cssValue | CSS_COMMA)* CLOSE_PARE
         ;
 
     cssInnerBlock
         : LBRACE (cssDeclaration)* RBRACE
         ;
 
-    selectorGroup: combineSelector (COMMA combineSelector)*;
+    selectorGroup: combineSelector (CSS_COMMA combineSelector)*;
 
-    combineSelector:selector (GT? selector)*;
+    combineSelector
+        : selector selectorPart*
+        ;
+
+    selectorPart
+        : combinator? selector
+        ;
+
+    combinator
+        : GT_CSS #GTCSSNode
+        | PLUS #PlusCSSNode
+        ;
 
     selector
         : CLASS_SELECTOR #ClassSelector
         | ID_SELECTOR #IDSelector
-        | IDENT #NameSelector
+        | PSEUDO_SELECTOR #PseudoSelector
+        | CSS_IDENT #ElementSelector
         | STAR #StarSelector
-        | COLON IDENT #PseudoSelector
         ;
 
-
     jinja2Rule
-        : jinjaExpression
-        | jinjaStatement
-        | COMMENT_JINJA2
+        : jinjaExpression #JinjaExpressionNode
+        | jinjaStatement #JinjaStatementNode
         ;
 
     jinjaExpression
@@ -115,10 +144,11 @@ element
          ;
 
     jinjaStatement
-        : ifStatement
-        | forStatement
-        | blockStatement
+        : ifStatement  #IfStatementNode
+        | forStatement #ForStatementNode
+        | blockStatement #BlockStatementNode
         ;
+
     ifStatement
         :  ifShape  elifShape* elseShape?
           (JINJA_STMT_START ENDIF  JINJA_STMT_END)
@@ -157,10 +187,20 @@ element
         : atom trailer*
         ;
     trailer
-        : JINJA_OPEN_PARE expression (JINJA_COMMA expression)* JINJA_CLOSE_PARE
-        | DOT JINJA_IDENT
-        | OPEN_BRACK expression CLOSE_BRACK
+        : JINJA_OPEN_PARE argumentList? JINJA_CLOSE_PARE #FunctionCallTrailer
+        | DOT JINJA_IDENT  #PropertyAccessTrailer
+        | OPEN_BRACK expression CLOSE_BRACK #IndexAccessTrailer
         ;
+
+    argumentList
+        : argument (JINJA_COMMA argument)*
+        ;
+
+    argument
+        : JINJA_IDENT ASSIGN expression   #KeywordArgument
+        | expression                      #PositionalArgument
+        ;
+
     comp_op
         : LT #LessThan
         | GT #GreaterThan
@@ -170,11 +210,11 @@ element
         | NEQ #NotEqual
         ;
     atom
-        : JINJA_NUMBER #Number
-        | JINJA_STRING #Text
-        | JINJA_IDENT  #AtomName
-        | TRUE  #Bool
-        | FALSE #Bool
+        : JINJA_NUMBER #NumberNode
+        | JINJA_STRING #StringNode
+        | JINJA_IDENT  #NameNode
+        | TRUE  #BoolNode
+        | FALSE #BoolNode
         ;
 
 

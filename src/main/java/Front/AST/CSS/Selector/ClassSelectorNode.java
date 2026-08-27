@@ -1,6 +1,8 @@
 package Front.AST.CSS.Selector;
 
-public class ClassSelectorNode extends SelectorNode{
+import Front.AST.ASTNode;
+
+public class ClassSelectorNode extends ASTNode {
     public final String className;
     public ClassSelectorNode(int line, String className) {
         super("Class", line);

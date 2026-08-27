@@ -1,7 +1,9 @@
 package Front.AST.CSS.Value;
 
 
-public class KeyboardNode extends ValueNode{
+import Front.AST.ASTNode;
+
+public class KeyboardNode extends ASTNode {
     public final String keyboard;
     public KeyboardNode(int line, String keyboard) {
         super("Keyboard", line);

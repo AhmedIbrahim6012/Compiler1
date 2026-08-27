@@ -1,6 +1,8 @@
 package Front.AST.CSS.Property;
 
-public class VariablePropertyNode extends  PropertyNode {
+import Front.AST.ASTNode;
+
+public class VariablePropertyNode extends ASTNode {
     public final String value;
     public VariablePropertyNode(int line, String value) {
         super("Variable", line);

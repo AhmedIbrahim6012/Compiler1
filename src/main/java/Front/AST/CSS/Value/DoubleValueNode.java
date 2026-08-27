@@ -1,6 +1,8 @@
 package Front.AST.CSS.Value;
 
-public class DoubleValueNode extends ValueNode{
+import Front.AST.ASTNode;
+
+public class DoubleValueNode extends ASTNode {
     public final double value;
     public final String unit;
     public DoubleValueNode(int line, double value, String unit) {
@@ -15,8 +17,6 @@ public class DoubleValueNode extends ValueNode{
         System.out.print(super.indent(indent+2)+value);
         if (unit != null) {
             System.out.println(" "+unit);
-        }else {
-            System.out.println();
         }
     }
 }

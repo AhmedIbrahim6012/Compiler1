@@ -1,169 +1,598 @@
 package SymbolTable;
-
 import Back.AST.*;
-import Back.AST.ExpressionStatement.AssignmentStatement;
-import Back.AST.ExpressionStatement.Atoms.NameAtomNode;
-import Back.AST.ExpressionStatement.CallExpressionNode;
-import Back.AST.ExpressionStatement.ExpressionNode;
-import Back.AST.ExpressionStatement.ExpressionStatementNode;
+import Back.AST.ExpressionStatement.*;
+import Back.AST.ExpressionStatement.Atoms.*;
+import Back.AST.ExpressionStatement.Operators.*;
+import Back.AST.FlowStatement.FlowStatementNode;
 import Back.AST.FlowStatement.RaiseStatementNode;
 import Back.AST.FlowStatement.ReturnStatementNode;
+import Back.AST.ImporStatement.*;
+import Front.AST.CSS.Value.FunctionNode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class SymbolTableVisitor {
-    private final SymbolTable symbolTable;
-    public  SymbolTableVisitor() {
-        this.symbolTable = new SymbolTable();
+    public final SymbolTable symbolTable;
+    public  SymbolTableVisitor(SymbolTable symbolTable) {
+        this.symbolTable = symbolTable;
     }
-    public void analyze(Program node) {
+
+    public void visit(Program node) {
+        if (node == null) {
+            return;
+        }
+        for (ASTNode statement : node.statements) {
+            visit(statement);
+        }
+    }
+
+    public void visit(ASTNode node){
         if (node == null){
             return;
         }
-
-        for(ASTNode statement: node.statements){
-            visit(statement,false);
-        }
-    }
-
-    private void visit(ASTNode node,boolean check){
-        if (node == null){
-            return;
-        }
-//        System.out.println(node instanceof  NameAtomNode);
-        if (node instanceof NameAtomNode){
-            visitNameAtom((NameAtomNode)node,check);
+        if (node instanceof BlockNode){
+            visit((BlockNode)node);
+        } else if (node instanceof CompoundStatementNode) {
+            visit((CompoundStatementNode)node);
+        } else if (node instanceof DecoratorNode){
+            visit((DecoratorNode)node);
+        } else if (node instanceof SimpleStatementNode) {
+            visit((SimpleStatementNode)node);
         } else if (node instanceof SimpleStatementsNode) {
-            visitSimpleStatements((SimpleStatementsNode)node,check);
-        } else if (node instanceof FunctionDefNode){
-            visitFunction((FunctionDefNode)node,check);
-        } else if (node instanceof BlockNode) {
-            visitBlock((BlockNode)node,check);
-        } else if (node instanceof AssignmentStatement) {
-            visitAssignment((AssignmentStatement)node,check);
-        } else if (node instanceof CallExpressionNode) {
-            visitCallFunction((CallExpressionNode)node,check);
-        } else if (node instanceof ReturnStatementNode) {
-            visitReturnStatement((ReturnStatementNode) node,check);
-        }else if (node instanceof ExpressionStatementNode){
-            visitExpressionStatement((ExpressionStatementNode)node,check);
-        }else if (node instanceof IfStatementNode){
-            visitIfStatement((IfStatementNode)node,check);
-        } else if (node instanceof ForStatementNode) {
-            visitForStatement((ForStatementNode)node,check);
-        } else if (node instanceof TryStatementNode) {
-            visitTryStatement((TryStatementNode)node,check);
-        } else if (node instanceof RaiseStatementNode) {
-            visitRaiseStatement((RaiseStatementNode) node,check);
+            visit((SimpleStatementsNode)node);
+        } else if (node instanceof ImportNode) {
+            visit((ImportNode)node);
         }
+
     }
 
-    private void visitReturnStatement(ReturnStatementNode node,boolean check){
-        visit(node.expression,true);
-    }
-
-    private void visitRaiseStatement(RaiseStatementNode node, boolean check){
-        visit(node.expressionBeforeFrom,true);
-        visit(node.expressionAfterFrom,true);
-    }
-
-    private void visitSimpleStatements(SimpleStatementsNode node,boolean check){
-        for (ASTNode statement: node.statements){
-            visit(statement,check);
-        }
-    }
-
-    private void visitExpressionStatement(ExpressionStatementNode node,boolean check){
-        visit(node.expression,check);
-    }
-
-    private void visitFunction(FunctionDefNode node,boolean check){
-        visit(node.name,false);
+    public void visit(DecoratorNode node){
+        List<TemplateInfo> templates = new ArrayList<>();
+        FunctionDefNode fnode = node.function;
+        String templateName;
         symbolTable.enterScope();
-        for (NameAtomNode params:node.parameters){
-            symbolTable.addSymbol(params.value,Type.Variable,node.line);
+        if (fnode.parameters != null){
+            for (ExpressionNode param:fnode.parameters.arguments){
+                if (param instanceof NameAtomNode) {
+                    DataType type = getDataType(param);
+                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type));
+                }
+            }
         }
-        visit(node.body,check);
+        visit(fnode.body);
+        analyzeTemplateBody(fnode.body,templates);
         symbolTable.exitScope();
-    }
-    private void visitCallFunction(CallExpressionNode node,boolean check){
-        visit(node.function,true);
-    }
-    private void visitBlock(BlockNode node,boolean check){
-        if (node ==null){
-            return;
-        }
-        for (ASTNode statement: node.statements){
-            visit(statement,check);
-        }
-    }
-    private void visitAssignment(AssignmentStatement node,boolean check){
-        if (node == null){
-            return;
-        }
-        for (ExpressionNode expr : node.right) {
-            visit(expr,true);
-        }
-        visit(node.left,check);
+        symbolTable.define(new RouteSymbol(node.function.name.value
+                ,node.line
+                ,node.decorates.get(0).pathParameters
+                ,templates));
     }
 
+    private TemplateInfo analyzeRenderTemplate(CallExpressionNode node){
+        List<Symbol> templateParams = new ArrayList<>();
+        String templateName;
+        if (node.arguments != null && !node.arguments.arguments.isEmpty()){
+            ExpressionNode firstArg = node.arguments.arguments.get(0);
+            if (firstArg instanceof StringAtomNode){
+                templateName = ((StringAtomNode) firstArg).value;
+            }else {
+                throw  new RuntimeException("Error : first arg of render_template must be String");
+            }
+            for (int i = 1; i < node.arguments.arguments.size(); i++) {
+                ExpressionNode arg = node.arguments.arguments.get(i);
+                if (arg instanceof AssignmentStatement){
+                    NameAtomNode name =(NameAtomNode) ((AssignmentStatement) arg).targets.get(0);
+                    ExpressionNode value = ((AssignmentStatement) arg).value;
+                    if (value instanceof NameAtomNode){
+                        Symbol symbol =  symbolTable.lookup(((NameAtomNode) value).value);
+                        if (symbol == null){
+                            throw new RuntimeException("Error undefined name : " + ((NameAtomNode) value).value + "  at line :" + ((NameAtomNode) value).line);
+                        }
+                        templateParams.add(symbol);
+                    }else {
+                        DataType type = getDataType(arg);
+                        templateParams.add(new VariableSymbol(name.value,name.line,type));
+                    }
 
-    private void visitNameAtom(NameAtomNode node,boolean check){
-        if (node ==null){
-            return;
-        }
-        String name = node.value;
-        if (check){
-            symbolTable.lookup(node.value,node.line);
+                }
+            }
         }else {
-            symbolTable.addSymbol(name,Type.Variable,node.line);
+            throw   new RuntimeException("Error : arguments of render_template must be exist");
         }
-
+        return new TemplateInfo(templateName,templateParams);
     }
 
-    private void visitIfStatement(IfStatementNode node,boolean check){
-        if (node ==null){
-            return;
-        }
-        visit(node.condition,true);
-        symbolTable.enterScope();
-        visit(node.body,check);
-        symbolTable.exitScope();
-        for (IfStatementNode.ElseIf elif : node.elseIf) {
-            visit(elif.condition,true);
-            symbolTable.enterScope();
-            visit(elif.body,check);
-            symbolTable.exitScope();
-        }
-        if (node.elseBody!=null){
-            symbolTable.enterScope();
-            visit(node.elseBody.body,check);
-            symbolTable.exitScope();
+    private void analyzeTemplateBody(ASTNode node,List<TemplateInfo>templates){
+        if (node == null)return;
+        if (node instanceof CallExpressionNode) {
+            if (((CallExpressionNode) node).function instanceof NameAtomNode){
+                if (((NameAtomNode) ((CallExpressionNode) node).function).value.equals("render_template")){
+                  TemplateInfo TemplateInfo =   analyzeRenderTemplate((CallExpressionNode) node);
+                  templates.add(TemplateInfo);
+                }
+            }
+        } else if (node instanceof ListExpressionNode) {
+            for (ExpressionNode expressionNode:((ListExpressionNode) node).elements){
+                analyzeTemplateBody(expressionNode,templates);
+            }
+        } else if (node instanceof ReturnStatementNode){
+            analyzeTemplateBody(((ReturnStatementNode) node).expression,templates);
+        } else if (node instanceof BlockNode) {
+            for (ASTNode statement : ((BlockNode) node).statements) {
+                analyzeTemplateBody(statement,templates);
+            }
+        } else if (node instanceof SimpleStatementsNode) {
+            for (ASTNode statement : ((SimpleStatementsNode) node).statements) {
+                analyzeTemplateBody(statement,templates);
+            }
+        } else if (node instanceof IfStatementNode) {
+            analyzeTemplateBody(((IfStatementNode) node).body,templates);
+            for (IfStatementNode.ElseIf elseIf : ((IfStatementNode) node).elseIf){
+                analyzeTemplateBody(elseIf.body,templates);
+            }
+            if (((IfStatementNode) node).elseBody != null){
+                analyzeTemplateBody(((IfStatementNode) node).elseBody,templates);
+            }
+        } else if (node instanceof TryStatementNode) {
+            analyzeTemplateBody(((TryStatementNode) node).body,templates);
+            for (TryStatementNode.Except except:((TryStatementNode) node).excepts){
+                analyzeTemplateBody(except.body,templates);
+            }
         }
     }
-    private void visitForStatement(ForStatementNode node,boolean check){
-        if (node ==null){
-            return;
-        }
-        visit(node.expression,true);
 
-        for (ExpressionNode param : node.params){
-            visit(param,check);
+    public void visit(SimpleStatementsNode node){
+        for (SimpleStatementNode statement : node.statements) {
+            visit((SimpleStatementNode)statement);
         }
-        symbolTable.enterScope();
-        visit(node.body,check);
-        if (node.elseBody!=null){
-            visit(node.elseBody.body,check);
-        }
-        symbolTable.exitScope();
     }
 
-    private void visitTryStatement(TryStatementNode node,boolean check){
+    public void visit(CompoundStatementNode node){
         if (node == null){
             return;
         }
-        visit(node.body,check);
-        for (TryStatementNode.Except except : node.excepts) {
-            visit(except.expression,check);
-            visit(except.body,check);
+        if (node instanceof ForStatementNode){
+            visit((ForStatementNode)node);
+        } else if (node instanceof FunctionDefNode){
+            visit((FunctionDefNode)node);
+        } else if (node instanceof IfStatementNode) {
+            visit((IfStatementNode)node);
+        } else if (node instanceof TryStatementNode) {
+            visit((TryStatementNode)node);
+        }
+    }
+
+    public void visit(SimpleStatementNode node){
+        if (node == null) return;
+        if (node instanceof ExpressionNode){
+            visit((ExpressionNode)node);
+        } else if (node instanceof FlowStatementNode) {
+            visit((FlowStatementNode)node);
+        }
+        else if (node instanceof ImportStatementNode){
+            visit((ImportStatementNode)node);
+        }
+    }
+
+    public void visit(FlowStatementNode node){
+        if (node instanceof ReturnStatementNode){
+            visit((ReturnStatementNode)node);
+        } else if (node instanceof RaiseStatementNode) {
+            visit((RaiseStatementNode)node);
+        }
+    }
+
+    public void visit(ImportStatementNode node){
+        if (node instanceof ImportFromNode){
+            visit((ImportFromNode)node);
+        } else if (node instanceof ImportNameNode) {
+            visit((ImportNameNode)node);
+        }
+    }
+
+    public void visit(ImportFromNode node){
+        for (ImportAsNameNode n:node.importAsNames.importAsNameNodes){
+            if (n.alias != null){
+                symbolTable.define(new FunctionSymbol(n.alias,n.line,0,null));
+            }else {
+                symbolTable.define(new FunctionSymbol(n.name,n.line,0,null));
+            }
+        }
+    }
+
+    public void visit(ImportNameNode node){
+        for (DottedAsNameNode n : node.DottedAsNames){
+            if (n.alias != null){
+                symbolTable.define(new FunctionSymbol(n.alias,n.line,0,null));
+            }else {
+                symbolTable.define(new FunctionSymbol(n.dottedName.parts.get(n.dottedName.parts.size()-1),n.line,0,null));
+            }
+        }
+    }
+
+    public void visit(ReturnStatementNode node){
+        visit(node.expression);
+    }
+
+    public void visit(RaiseStatementNode node){
+        visit(node.expressionBeforeFrom);
+        visit(node.expressionAfterFrom);
+    }
+
+    public void visit(ExpressionNode node){
+        if (node == null){
+            return;
+        }
+        if (node instanceof ArgumentsExpressionNode){
+            visit((ArgumentsExpressionNode)node);
+        } else if (node instanceof AssignmentStatement) {
+            visit((AssignmentStatement)node);
+        } else if (node instanceof AttributeExpressionNode){
+            visit((AttributeExpressionNode)node);
+        } else if (node instanceof BinaryExpressionNode) {
+            visit((BinaryExpressionNode)node);
+        } else if (node instanceof CallExpressionNode){
+            visit((CallExpressionNode)node);
+        } else if (node instanceof CompareExpressionNode) {
+            visit((CompareExpressionNode)node);
+        } else if (node instanceof DictionaryExpressionNode){
+            visit((DictionaryExpressionNode)node);
+        }else if (node instanceof IndexExpressionNode) {
+            visit((IndexExpressionNode)node);
+        } else if (node instanceof ListExpressionNode){
+            visit((ListExpressionNode)node);
+        }else if (node instanceof TupleExpressionNode) {
+            visit((TupleExpressionNode)node);
+        } else if (node instanceof UnaryExpressionNode){
+            visit((UnaryExpressionNode)node);
+        }else if (node instanceof NameAtomNode){
+         Symbol symbol =  symbolTable.lookup(((NameAtomNode) node).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node).value + "  at line :" + node.line);
+            }
+        } else if (node instanceof ArithmeticExpressionNode) {
+            visit((ArithmeticExpressionNode) node);
+        }
+    }
+
+    public void visit(AttributeExpressionNode node){
+        if (node.value instanceof NameAtomNode){
+            Symbol symbol = symbolTable.lookup(((NameAtomNode) node.value).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.value).value + "  at line :" + (node.value).line);
+            }
+        }else {
+            visit(node.value);
+        }
+    }
+
+    public void visit(UnaryExpressionNode node){
+        if (node.operand instanceof NameAtomNode){
+            Symbol symbol = symbolTable.lookup(((NameAtomNode) node.operand).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.operand).value + "  at line :" + (node.operand).line);
+            }
+        }else {
+            visit(node.operand);
+        }
+    }
+
+    public void visit(BinaryExpressionNode node){
+        if (node.left instanceof NameAtomNode){
+            Symbol symbol = symbolTable.lookup(((NameAtomNode) node.left).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.left).value + "  at line :" + (node.left).line);
+            }
+        }else {
+            visit(node.left);
+        }
+        for (ExpressionNode right:node.right){
+            if (right instanceof NameAtomNode){
+                Symbol symbol = symbolTable.lookup(((NameAtomNode) right).value);
+                if (symbol == null){
+                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) right).value + "  at line :" + ((NameAtomNode) right).line);
+                }
+            }else {
+                visit(right);
+            }
+        }
+    }
+
+    public void visit(ArithmeticExpressionNode node){
+        DataType leftType = getDataType(node.left);
+        DataType rightType = getDataType(node.right);
+        boolean isValid =
+                (leftType.equals(DataType.INT) && rightType.equals(DataType.STRING))
+                ||(leftType.equals(DataType.STRING) && rightType.equals(DataType.INT))
+                ||(leftType.equals(DataType.UNKNOWN) && rightType.equals(DataType.STRING))
+                ||(leftType.equals(DataType.STRING) && rightType.equals(DataType.UNKNOWN))
+                ||(leftType.equals(DataType.INT) && rightType.equals(DataType.UNKNOWN))
+                ||(leftType.equals(DataType.UNKNOWN) && rightType.equals(DataType.INT));
+        if (isValid){
+            throw  new RuntimeException("Mismatch type error : "+leftType+" , "+rightType);
+        }
+    }
+
+    public void visit(CompareExpressionNode node){
+        if (node.left instanceof NameAtomNode){
+            Symbol symbol = symbolTable.lookup(((NameAtomNode) node.left).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.left).value + "  at line :" + ((NameAtomNode) node.left).line);
+            }
+        }else {
+            visit(node.left);
+        }
+        for (ExpressionNode right:node.comparators){
+            if (right instanceof NameAtomNode){
+                Symbol symbol = symbolTable.lookup(((NameAtomNode) right).value);
+                if (symbol == null){
+                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) right).value + "  at line :" + ((NameAtomNode) right).line);
+                }
+            }else {
+                visit(right);
+            }
+        }
+    }
+
+    public void visit(IndexExpressionNode node){
+        if (node == null)return;
+        if (node.object instanceof NameAtomNode){
+            String name = ((NameAtomNode) node.object).value;
+            Symbol symbol = symbolTable.lookup(name);
+            if (symbol == null) {
+                throw new RuntimeException("Error undefined name : " + name + "  at line :" + node.line);
+            }
+            if (((VariableSymbol)symbol).getType() != DataType.DICTIONARY && ((VariableSymbol)symbol).getType() != DataType.LIST){
+              throw new RuntimeException(
+                      "Error: Type '" + ((VariableSymbol)symbol).getType() + "' is not indexable at line " + node.line
+              );
+            }
+        }else {
+            visit(node.object);
+        }
+    }
+
+    public void visit(DictionaryExpressionNode node){
+        if (node == null)return;
+        for (Map.Entry<ExpressionNode, ExpressionNode> element : node.map.entrySet()) {
+            if (!isValidDictionaryKey(element.getKey())) {
+                throw new RuntimeException("Type Error: " + element.getKey().name + " is not valid key at line " + node.line);
+            }
+            if (element.getValue() instanceof NameAtomNode){
+                String name = ((NameAtomNode) element.getValue()).value;
+               Symbol sym =  symbolTable.lookup(name);
+                if (sym == null) {
+                    throw new RuntimeException("Error undefined name : " + name + "  at line :" + node.line);
+                }
+            }else {
+                visit(element.getValue());
+            }
+        }
+    }
+
+    private boolean isValidDictionaryKey(ExpressionNode node){
+        if (node == null)return false;
+        return (node instanceof StringAtomNode) || (node instanceof IntNumberAtomNode) || (node instanceof BoolAtomNode) || (node instanceof DoubleNumberAtomNode) || (node instanceof NoneAtomNode) || (node instanceof TupleExpressionNode);
+    }
+
+    public void visit(TupleExpressionNode node){
+        if (node == null)return;
+        for (ExpressionNode element : node.elements) {
+            if (element instanceof NameAtomNode){
+              Symbol symbol =   symbolTable.lookup(((NameAtomNode) element).value);
+                if (symbol == null){
+                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) element).value + "  at line :" + element.line);
+                }
+            }else {
+                visit(element);
+            }
+        }
+    }
+
+    public void visit(ListExpressionNode node){
+        if (node == null)return;
+        for (ExpressionNode element : node.elements) {
+            if (element instanceof NameAtomNode){
+               Symbol symbol =  symbolTable.lookup(((NameAtomNode) element).value);
+                if (symbol == null){
+                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) element).value + "  at line :" + element.line);
+                }
+            }else {
+                visit(element);
+            }
+        }
+    }
+
+    public void visit(ImportNode node){
+        if (node == null){
+            return;
+        }
+        if (node instanceof DottedAsNameNode){
+            visit(node);
+        } else if (node instanceof DottedNameNode) {
+            visit(node);
+        } else if (node instanceof ImportAsNameNode){
+            visit(node);
+        }else if (node instanceof ImportAsNamesNode){
+            visit(node);
+        }
+    }
+
+    public void visit(AssignmentStatement node){
+        visit(node.value);
+        DataType type = getDataType(node.value);
+        for (ExpressionNode taget:node.targets){
+            if (taget instanceof NameAtomNode){
+                symbolTable.define(
+                        new VariableSymbol(
+                                ((NameAtomNode) taget).value,
+                                taget.line,
+                                type
+                        )
+                );
+            }else if (isPrimitive(taget)){
+                throw new RuntimeException("cannot assign to primitive value");
+            }else {
+                visit(taget);
+            }
+        }
+    }
+
+    private boolean isPrimitive(ExpressionNode node){
+        if (node instanceof IntNumberAtomNode) {
+            return true;
+        } else if (node instanceof DoubleNumberAtomNode) {
+            return true;
+        } else if (node instanceof StringAtomNode) {
+            return true;
+        } else if (node instanceof BoolAtomNode) {
+            return true;
+        }else if (node instanceof NoneAtomNode) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private DataType getDataType(ExpressionNode node) {
+        if (node instanceof IntNumberAtomNode) {
+            return DataType.INT;
+        } else if (node instanceof DoubleNumberAtomNode) {
+            return DataType.FLOAT;
+        } else if (node instanceof StringAtomNode) {
+            return DataType.STRING;
+        } else if (node instanceof BoolAtomNode) {
+            return DataType.BOOLEAN;
+        } else if ((node instanceof ListExpressionNode) || (node instanceof TupleExpressionNode)) {
+            return DataType.LIST;
+        } else if (node instanceof DictionaryExpressionNode) {
+            return DataType.DICTIONARY;
+        }
+        return DataType.UNKNOWN;
+    }
+
+    public void visit(FunctionDefNode node){
+        int paramsCount = 0;
+        if (node.parameters != null){
+            paramsCount = node.parameters.arguments.size();
+        }
+        symbolTable.define(new FunctionSymbol(node.name.value,node.name.line,paramsCount,null));
+        symbolTable.enterScope();
+        if (node.parameters != null){
+            for (ExpressionNode param:node.parameters.arguments){
+                if (param instanceof NameAtomNode) {
+                    DataType type = getDataType(param);
+                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type));
+                }
+            }
+        }
+        visit(node.body);
+        symbolTable.exitScope();
+    }
+
+    public void visit(CallExpressionNode node){
+        if (node.function instanceof NameAtomNode) {
+            String funcName = ((NameAtomNode) node.function).value;
+            Symbol sym = symbolTable.lookup(funcName);
+            if (sym == null) {
+                throw new RuntimeException("Error undefined : function name " + funcName + "  at line :" + node.line);
+            }
+            if (!(sym instanceof FunctionSymbol)) {
+                throw new RuntimeException("Error: " + funcName + " is not a callable at line " + node.line);
+            }
+//            if (node.arguments == null)return;
+//            if (node.arguments.arguments.size() != ((FunctionSymbol) sym).getParamCount()){
+//                throw new RuntimeException("Error: " + funcName + " has " + ((FunctionSymbol) sym).getParamCount() + " arguments at line " + node.line);
+//            }
+        }else {
+            visit(node.function);
+        }
+        visit(node.arguments);
+    }
+
+    public void visit(ArgumentsExpressionNode node){
+        if(node == null){
+            return;
+        }
+       for (ExpressionNode argument:node.arguments){
+           if (argument instanceof NameAtomNode){
+               String funcName = ((NameAtomNode) argument).value;
+             Symbol symbol =   symbolTable.lookup(funcName);
+               if (symbol == null){
+                   throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) argument).value + "  at line :" + argument.line);
+               }
+           }
+       }
+    }
+
+    public void visit(BlockNode node){
+        if (node == null){
+            return;
+        }
+        for (ASTNode statement: node.statements){
+            visit(statement);
+        }
+    }
+
+    private void visit(IfStatementNode node){
+        if (node ==null){
+            return;
+        }
+        if (node.condition instanceof NameAtomNode){
+            Symbol symbol = symbolTable.lookup(((NameAtomNode) node.condition).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.condition).value + "  at line :" + ((NameAtomNode) node.condition).line);
+            }
+        }else {
+            visit(node.condition);
+        }
+        visit(node.body);
+        for (IfStatementNode.ElseIf elseIf : node.elseIf){
+            if (elseIf.condition instanceof NameAtomNode){
+                Symbol symbol = symbolTable.lookup(((NameAtomNode) elseIf.condition).value);
+                if (symbol == null){
+                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) elseIf.condition).value + "  at line :" + ((NameAtomNode) node.condition).line);
+                }
+            }else {
+                visit(elseIf.condition);
+            }
+            visit(elseIf.body);
+        }
+        if (node.elseBody != null){
+            visit(node.elseBody);
+        }
+    }
+
+    public void visit(ForStatementNode node){
+        if (node == null)return;
+        if (node.expression instanceof  NameAtomNode) {
+          Symbol symbol =  symbolTable.lookup(((NameAtomNode) node.expression).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node.expression).value + "  at line :" + ((NameAtomNode) node.expression).line);
+            }
+        }else {
+            visit(node.expression);
+        }
+        for (ExpressionNode param : node.params){
+            if (param instanceof NameAtomNode){
+                symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,DataType.UNKNOWN));
+            }else{
+                visit(param);
+            }
+        }
+        visit(node.body);
+        if (node.elseBody != null){
+            visit(node.elseBody.body);
+        }
+    }
+
+    public void visit(TryStatementNode node){
+        if (node == null) return;
+        visit(node.body);
+        for (TryStatementNode.Except ex:node.excepts){
+            visit(ex.body);
         }
     }
 }

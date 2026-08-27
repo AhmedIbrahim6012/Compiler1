@@ -3,12 +3,15 @@ package Front.AST.CSS.Value;
 import Front.AST.ASTNode;
 
 public class ValueNode extends ASTNode {
-    public ValueNode(String name, int line) {
-        super(name, line);
+    public final ASTNode value ;
+    public ValueNode(int line,ASTNode value) {
+        super("Value", line);
+        this.value = value;
     }
 
     @Override
     public void printTree(int indent) {
-        super.printTree(indent);
+        System.out.println(super.indent(indent) + super.name + " (line " + line + ") :");
+        value.printTree(indent+2);
     }
 }

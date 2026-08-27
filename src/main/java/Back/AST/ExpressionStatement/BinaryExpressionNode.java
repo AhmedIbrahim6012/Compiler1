@@ -14,7 +14,6 @@ public class BinaryExpressionNode extends ExpressionNode {
         this.right = right;
         this.operator = operator;
     }
-
     @Override
     public void printTree(int indent){
         System.out.println(super.indent(indent) + super.name + " (line " + line + ")");

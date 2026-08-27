@@ -23,12 +23,12 @@ tokens {
         }
       }
 
-      this.emit(commonToken(MyParser.NEWLINE, "\n"));
+      this.emit(commonToken(BackParser.NEWLINE, "\n"));
       while (!indents.isEmpty()) {
         this.emit(createDedent());
         indents.pop();
       }
-      this.emit(commonToken(MyParser.EOF, "<EOF>"));
+      this.emit(commonToken(BackParser.EOF, "<EOF>"));
     }
     Token next = super.nextToken();
     if (next.getChannel() == Token.DEFAULT_CHANNEL) {
@@ -38,7 +38,7 @@ tokens {
   }
 
     private Token createDedent() {
-      CommonToken dedent = commonToken(MyParser.DEDENT, "");
+      CommonToken dedent = commonToken(BackParser.DEDENT, "");
       dedent.setLine(this.lastToken.getLine());
       return dedent;
     }
@@ -88,7 +88,7 @@ NEWLINE
        }
        else if (indent > previous) {
          indents.push(indent);
-         emit(commonToken(MyParser.INDENT, spaces));
+         emit(commonToken(BackParser.INDENT, spaces));
        }
        else {
          while(!indents.isEmpty() && indents.peek() > indent) {
@@ -122,7 +122,8 @@ RETURN     : 'return';
 TRUE       : 'True';
 TRY        : 'try';
 UNDERSCORE : '_';
-
+BREAK       : 'break';
+CONTINUE        : 'continue';
 
 DOT                : '.';
 ELLIPSIS           : '...';

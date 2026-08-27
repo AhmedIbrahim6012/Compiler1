@@ -1,8 +1,8 @@
 package Back.AST.ExpressionStatement;
 
-import Back.AST.ASTNode;
+import Back.AST.SimpleStatementNode;
 
-public abstract class ExpressionNode extends ASTNode {
+public abstract class ExpressionNode extends SimpleStatementNode {
     public ExpressionNode(int line, String name) {
         super(line, name);
     }

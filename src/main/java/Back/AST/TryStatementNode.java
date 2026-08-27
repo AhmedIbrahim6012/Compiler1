@@ -28,7 +28,7 @@ public class TryStatementNode extends CompoundStatementNode {
         public  final BlockNode body;
 
         public Except(int line, ExpressionNode expression, BlockNode body) {
-            super(line, "Else");
+            super(line, "Except");
             this.expression = expression;
             this.body = body;
         }

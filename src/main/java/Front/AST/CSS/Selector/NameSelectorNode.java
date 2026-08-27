@@ -1,6 +1,8 @@
 package Front.AST.CSS.Selector;
 
-public class NameSelectorNode extends SelectorNode {
+import Front.AST.ASTNode;
+
+public class NameSelectorNode extends ASTNode {
 	public final String value;
 
     public NameSelectorNode(int line,String value) {

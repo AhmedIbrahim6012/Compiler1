@@ -1,0 +1,4 @@
+def app(a):
+  a=7
+
+appfd(a)

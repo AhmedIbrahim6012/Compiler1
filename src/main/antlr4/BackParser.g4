@@ -3,10 +3,17 @@ options {
     tokenVocab = BackLexer;
 }
 
+
 program
-    : (simple_statements | compound_statements | decorated | NEWLINE)* EOF
+    : statement* EOF
     ;
 
+statement
+    : simple_statements    #SimpleStatementsNode
+    | compound_statements  #CompoundStatementsNode
+    | decorated            #DecoratedNode
+    | NEWLINE              #BlackLine
+    ;
 
 
 simple_statements
@@ -14,9 +21,9 @@ simple_statements
     ;
 
 simple_statement
-    : expression_statement
-    | import_statement
-    | flow_statement
+    : expression_statement #ExpressionStatementNode
+    | import_statement #ImportStatementNode
+    | flow_statement #FlowStatementNode
     ;
 
 decorated
@@ -32,19 +39,18 @@ funcdef
     ;
 
 parameters
-     : OPEN_PAREN paramlist? CLOSE_PAREN
+     : OPEN_PAREN arglist? CLOSE_PAREN
      ;
 
 paramlist
      : NAME (COMMA NAME)*
      ;
 
-
-
-
 flow_statement
-    : return_statement
-    | raise_statement
+    : return_statement #ReturnStatementNode
+    | raise_statement #RaiseStatementNode
+    | BREAK #BreakStatementNode
+    | CONTINUE #ContinueStatementNode
     ;
 
 return_statement
@@ -55,22 +61,22 @@ raise_statement
     ;
 
 compound_statements
-    : if_statement
-    | for_statement
-    | try_statement
-    | funcdef
+    : if_statement #IfStatementNode
+    | for_statement #ForStatementNode
+    | try_statement #TryStatementNode
+    | funcdef #FundefStatementNode
     ;
 
 if_statement
     : IF test COLON block (ELIF test COLON block)* (ELSE COLON block)?
     ;
 block
-     : simple_statements
-     | NEWLINE INDENT statements+ DEDENT
+     : simple_statements #SimpleStatementsBlockNode
+     | NEWLINE INDENT statements+ DEDENT #StatementBlockNode
      ;
 statements
-    : simple_statements
-    | compound_statements
+    : simple_statements #SimpleStatements1Node
+    | compound_statements #CompoundStatements1Node
     ;
 
 try_statement
@@ -86,17 +92,15 @@ exprlist
     ;
 
 import_statement
-    : import_name
-    | import_from
+    : import_name #ImportNameNode
+    | import_from #ImportFromNode
     ;
 
 import_from
-    : (
-        FROM dotted_name IMPORT (
+    : FROM dotted_name IMPORT (
             OPEN_PAREN import_as_names CLOSE_PAREN
             | import_as_names
         )
-    )
     ;
 
 import_as_names
@@ -136,8 +140,8 @@ and_test
     ;
 
 not_test
-    : NOT not_test
-    | comparison
+    : NOT not_test #NotExpressionNode
+    | comparison #ComparisionNode
     ;
 
 comparison
@@ -158,14 +162,15 @@ comp_op
      ;
 
 expr
-    : atom trailer*
+    : atom trailer* #AtomExpression
+    | expr (ADD | MINUS) expr #AdditiveExpression
     ;
 
 atom
-    : OPEN_PAREN expression? CLOSE_PAREN
-    | OPEN_BRACK expression? CLOSE_BRACK
-    | OPEN_BRACE dictmaker? CLOSE_BRACE
-    | value
+    : OPEN_PAREN expression? CLOSE_PAREN #TupleNode
+    | OPEN_BRACK expression? CLOSE_BRACK #ListNode
+    | OPEN_BRACE dictmaker? CLOSE_BRACE #DictionaryNode
+    | value #ValueNode
     ;
 
 value
@@ -185,9 +190,9 @@ dictmaker
     ;
 
 trailer
-    : OPEN_PAREN arglist? CLOSE_PAREN
-    | DOT NAME
-    | OPEN_BRACK test CLOSE_BRACK
+    : OPEN_PAREN arglist? CLOSE_PAREN #CallFunctionTrailer
+    | DOT NAME #AccessPropertyTrailer
+    | OPEN_BRACK test CLOSE_BRACK #AccessIndexTrailer
     ;
 
 arglist

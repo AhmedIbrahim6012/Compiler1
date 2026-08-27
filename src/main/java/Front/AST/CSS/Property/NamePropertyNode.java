@@ -1,6 +1,8 @@
 package Front.AST.CSS.Property;
 
-public class NamePropertyNode extends  PropertyNode {
+import Front.AST.ASTNode;
+
+public class NamePropertyNode extends ASTNode {
     public final String value;
     public NamePropertyNode(int line, String value) {
         super("Name", line);

@@ -2,13 +2,16 @@ package Front.AST.CSS.Property;
 
 import Front.AST.ASTNode;
 
-abstract public class PropertyNode extends ASTNode {
-    public PropertyNode(String name, int line) {
-        super(name, line);
+public class PropertyNode extends ASTNode {
+    public final ASTNode property;
+    public PropertyNode(int line,ASTNode property) {
+        super("Property", line);
+        this.property = property;
     }
 
     @Override
     public void printTree(int indent) {
-        super.printTree(indent);
+        System.out.println(super.indent(indent) + super.name + " (line " + line + ") :");
+        property.printTree(indent+2);
     }
 }

@@ -1,6 +1,8 @@
 package Front.AST.CSS.Value;
 
-public class VariableNode extends ValueNode{
+import Front.AST.ASTNode;
+
+public class VariableNode extends ASTNode {
     public final String variable;
     public VariableNode(int line, String variable) {
         super("Variable", line);

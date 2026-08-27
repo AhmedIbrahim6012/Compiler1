@@ -1,9 +1,9 @@
 package Back.AST.ImporStatement;
 
 public class DottedAsNameNode extends  ImportNode {
-    public final ImportNode  dottedName;
+    public final DottedNameNode  dottedName;
     public final String alias;
-    public DottedAsNameNode(int line, ImportNode dottedName, String alias) {
+    public DottedAsNameNode(int line, DottedNameNode dottedName, String alias) {
         super(line, "DottedAsName");
         this.dottedName = dottedName;
         this.alias = alias;

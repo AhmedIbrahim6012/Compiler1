@@ -3,14 +3,16 @@ package Front.AST.Html;
 
 import Front.AST.ASTNode;
 import java.util.List;
-import Front.AST.CSS.Value.NameNode;
+import Front.AST.NameNode;
 public class HtmlElementNode extends ASTNode {
     public final NameNode tagName;
     public  final List<HtmlAttributeNode> attributes;
     public final List<ASTNode> children;
-    public HtmlElementNode( int line,NameNode tagName, List<HtmlAttributeNode> attributes, List<ASTNode> children) {
+    public final boolean isSelfClose;
+    public HtmlElementNode( int line,NameNode tagName,boolean isSelfClose, List<HtmlAttributeNode> attributes, List<ASTNode> children) {
         super("Element", line);
         this.tagName = tagName;
+        this.isSelfClose = isSelfClose;
         this.attributes = attributes;
         this.children = children;
     }
@@ -25,7 +27,6 @@ public class HtmlElementNode extends ASTNode {
                 attribute.printTree(indent+4);
             }
         }
-
         if (!children.isEmpty()){
             System.out.println(super.indent(indent+2)+"Elements :");
             for (ASTNode child:children){

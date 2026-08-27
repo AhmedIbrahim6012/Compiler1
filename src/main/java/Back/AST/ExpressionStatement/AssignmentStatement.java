@@ -3,23 +3,23 @@ package Back.AST.ExpressionStatement;
 import java.util.List;
 
 public class AssignmentStatement extends ExpressionNode {
-    public final List<ExpressionNode> right;
-    public final ExpressionNode left;
-    public AssignmentStatement(int line, List<ExpressionNode> right, ExpressionNode left) {
+    public final List<ExpressionNode> targets;
+    public final ExpressionNode value;
+    public AssignmentStatement(int line, List<ExpressionNode> targets, ExpressionNode value) {
         super(line,"Assignment");
-        this.right = right;
-        this.left = left;
+        this.targets = targets;
+        this.value = value;
     }
 
     @Override
     public void printTree(int indent){
         System.out.println(super.indent(indent) + super.name + " (line " + line + ")");
-        System.out.println(super.indent(indent+2)+"Left:");
-        left.printTree(indent+4);
-        System.out.println(super.indent(indent+2)+"Right:");
-        for (ExpressionNode expr : right) {
+
+        System.out.println(super.indent(indent+2)+"Targets:");
+        for (ExpressionNode expr : targets) {
             expr.printTree(indent + 4);
         }
-
+        System.out.println(super.indent(indent+2)+"Value:");
+        value.printTree(indent+4);
     }
 }

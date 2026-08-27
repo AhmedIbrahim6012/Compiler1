@@ -1,12 +1,9 @@
 package Front.AST.CSS.Selector;
 
-public class StarSelectorNode extends SelectorNode{
+import Front.AST.ASTNode;
+
+public class StarSelectorNode extends ASTNode {
     public StarSelectorNode( int line) {
         super("Star", line);
-    }
-
-    @Override
-    public void printTree(int indent) {
-        System.out.println(super.indent(indent) + super.name + " (line " + line + ")");
     }
 }

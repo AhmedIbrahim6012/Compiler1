@@ -1,6 +1,8 @@
 package Front.AST.CSS.Selector;
 
-public class IDSelectorNode extends SelectorNode{
+import Front.AST.ASTNode;
+
+public class IDSelectorNode extends ASTNode {
     public final String id;
     public IDSelectorNode(int line, String id) {
         super("ID", line);

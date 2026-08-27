@@ -3,20 +3,18 @@ package Back.AST.ImporStatement;
 import java.util.List;
 
 public class ImportFromNode extends ImportStatementNode{
-    public final ImportNode moduleName;
-    public final List<ImportNode> importAsNames;
-    public ImportFromNode(int line, ImportNode moduleName, List<ImportNode> importAsNames) {
+    public final DottedNameNode dottedName;
+    public final ImportAsNamesNode importAsNames;
+    public ImportFromNode(int line, DottedNameNode dottedName, ImportAsNamesNode importAsNames) {
         super(line,"ImportFrom");
-        this.moduleName = moduleName;
+        this.dottedName = dottedName;
         this.importAsNames = importAsNames;
     }
 
     @Override
     public void printTree(int indent) {
         System.out.println(super.indent(indent) + super.name + " (line " + line + ")");
-        moduleName.printTree(indent + 2);
-        for (ImportNode n : importAsNames) {
-            n.printTree(indent + 4);
-        }
+        dottedName.printTree(indent + 2);
+        importAsNames.printTree(indent + 2);
     }
 }

@@ -1,6 +1,8 @@
 package Front.AST.CSS.Value;
 
-public class ColorNode extends ValueNode{
+import Front.AST.ASTNode;
+
+public class ColorNode extends ASTNode {
     public final String color;
     public ColorNode(int line, String color) {
         super("Color", line);

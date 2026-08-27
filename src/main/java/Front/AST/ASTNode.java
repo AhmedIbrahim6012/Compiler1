@@ -3,7 +3,7 @@ package Front.AST;
 
    public abstract class ASTNode {
     protected String name;
-    protected int line;
+    public int line;
     public ASTNode(String name, int line) {
         this.name = name;
         this.line = line;
