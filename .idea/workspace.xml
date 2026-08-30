@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="" />
+    <list default="true" id="09916b3a-2683-4f57-adaf-3ecbfba7f750" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back_test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Back/Visitor/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CodeGeneration/BackGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeGeneration/BackGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

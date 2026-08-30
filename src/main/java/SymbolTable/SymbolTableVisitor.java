@@ -311,7 +311,7 @@ public class SymbolTableVisitor {
                 ||(leftType.equals(DataType.INT) && rightType.equals(DataType.UNKNOWN))
                 ||(leftType.equals(DataType.UNKNOWN) && rightType.equals(DataType.INT));
         if (isValid){
-            throw  new RuntimeException("Mismatch type error : "+leftType+" , "+rightType);
+            throw  new RuntimeException("Mismatch type error : "+leftType+" , "+rightType+"  at line : "+node.line);
         }
     }
 
@@ -344,11 +344,11 @@ public class SymbolTableVisitor {
             if (symbol == null) {
                 throw new RuntimeException("Error undefined name : " + name + "  at line :" + node.line);
             }
-            if (((VariableSymbol)symbol).getType() != DataType.DICTIONARY && ((VariableSymbol)symbol).getType() != DataType.LIST){
-              throw new RuntimeException(
-                      "Error: Type '" + ((VariableSymbol)symbol).getType() + "' is not indexable at line " + node.line
-              );
-            }
+//            if (((VariableSymbol)symbol).getType() != DataType.DICTIONARY && ((VariableSymbol)symbol).getType() != DataType.LIST){
+//              throw new RuntimeException(
+//                      "Error: Type '" + ((VariableSymbol)symbol).getType() + "' is not indexable at line " + node.line
+//              );
+//            }
         }else {
             visit(node.object);
         }

@@ -261,13 +261,14 @@ public class ASTVisitor extends BackParserBaseVisitor<ASTNode> {
     }
     @Override
     public ExpressionNode visitArgument(BackParser.ArgumentContext ctx) {
-        ExpressionNode left =(ExpressionNode) visit(ctx.test(0));
-        List<ExpressionNode> right = new ArrayList<>();
-        if (ctx.ASSIGN()!=null){
-            right.add((ExpressionNode) visit((ctx.test(1))));
-            return new AssignmentStatement(ctx.start.getLine(),right,left);
+        if (ctx.ASSIGN() == null) {
+            return (ExpressionNode) visit(ctx.test(0));
+        }else {
+            ExpressionNode value = (ExpressionNode) visit(ctx.test(1));
+            List<ExpressionNode> targets = new ArrayList<>();
+            targets.add((ExpressionNode) visit(ctx.test(0)));
+            return new AssignmentStatement(ctx.start.getLine(),targets,value);
         }
-        return left;
     }
     @Override
     public AtomNode visitNumber(BackParser.NumberContext ctx) {

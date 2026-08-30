@@ -375,6 +375,7 @@ import java.util.Map;
             if (op instanceof PlusOperatorNode) return "+";
             if (op instanceof MinusOperatorNode) return "-";
             if (op instanceof NotEqualOperatorNode) return "!=";
+            if (op instanceof EqualOperatorNode) return "==";
 
             return op.name != null ? op.name : "";
         }
