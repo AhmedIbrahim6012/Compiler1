@@ -74,6 +74,10 @@ public class SymbolTable {
                 "len",0,
                 1,
                 DataType.INT));
+        define(new FunctionSymbol(
+                "url_for",0,
+                1,
+                DataType.STRING));
 
         define(new FunctionSymbol(
                 "range",0,

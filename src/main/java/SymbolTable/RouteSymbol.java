@@ -5,7 +5,7 @@ import java.util.List;
 public class RouteSymbol extends  Symbol{
 
    private final List<String> parameters;
-   public final List<TemplateInfo> templates;
+   private final List<TemplateInfo> templates;
    public RouteSymbol(String name,int line,List<String>parameters,List<TemplateInfo> templates) {
        super(name,line,SymbolKind.ROUTE);
        this.parameters = parameters;

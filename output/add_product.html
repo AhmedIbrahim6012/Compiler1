@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Add Product</title>
+<style>
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --dark-color: #2c3e50;
+  --light-color: #ecf0f1;
+  --gray-color: #95a5a6;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family:  Tahoma Geneva Verdana sans-serif;
+  background-color: #f5f7fa;
+  color: var();
+  line-height: 1.6;
+}
+.navbar {
+  background: linear-gradient(135deg, var() 0%, #2980b9 100%);
+  box-shadow: var();
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: var();
+}
+.nav-branda:hover {
+  transform: scale(1.05);
+}
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: var();
+  padding: 0.5rem 1rem;
+  border-radius: var();
+}
+.nav-link {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.btn-add {
+  background-color: var();
+  font-weight: bold;
+}
+.btn-add {
+  background-color: #27ae60;
+}
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+.form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: var();
+  box-shadow: var();
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+.form-container {
+  color: var();
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group {
+  color: var();
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.form-group, .form-group {
+  padding: 0.75rem;
+  border: 2px solid var();
+  border-radius: var();
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var();
+}
+.form-groupinput:focus, .form-grouptextarea:focus {
+  outline: none;
+  border-color: var();
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+.form-group {
+  color: var();
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.form-actions {
+  flex: 1;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: var();
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: var();
+}
+.btn-primary {
+  background-color: var();
+  color: white;
+}
+.btn-primary {
+  background-color: #2980b9;
+}
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var();
+  border: 2px solid var();
+}
+.btn-outline {
+  background-color: var();
+  color: white;
+}
+.btn-lg {
+  font-size: 1rem;
+}
+.footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  color: var();
+}
+@media (max-width:768px) {
+.nav-container {
+  flex-direction: column;
+  gap: 1rem;
+}
+.container {
+  padding: 0 1rem;
+}
+.form-actions {
+  flex-direction: column;
+}
+}
+</style>
+</head><body><nav class="navbar"><div class="nav-container"><div class="nav-brand"><a href="">Product Store</a></div><ul class="nav-menu"><li><a href="" class="nav-link btn-add">Add Product</a></li></ul></div></nav><div class="container"><div class="form-container"><h1>Add New Product</h1><form method="POST" class="product-form"><div class="form-group"><label for="name">Product Name</label><input type="text" id="name" name="name" required placeholder="Enter product name" maxlength="100"><small>Max length 20 char</small></div><div class="form-group"><label for="price">Product Price</label><input type="number" id="price" name="price" required placeholder="Enter price" step="0.01" min="0"><small>Enter a positive number</small></div><div class="form-group"><label for="description">Product Details</label><textarea id="description" name="description" required placeholder="Enter product details" rows="6" maxlength="500"></textarea><small>Max length 500 char</small></div><div class="form-group"><label for="image">Product Image</label><input type="text" id="image" name="image" placeholder="Select product image"><small>If you don't choose an image, the default image will be used</small></div><div class="form-actions"><button type="submit" class="btn btn-primary btn-lg">Add</button><a href="" class="btn btn-outline btn-lg">Cancel</a></div></form></div></div><footer class="footer"><p>&copy; Product Store App. All rights reserved 2025</p></footer></body></html>

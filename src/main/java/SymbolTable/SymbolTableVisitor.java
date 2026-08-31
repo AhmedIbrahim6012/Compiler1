@@ -10,6 +10,7 @@ import Back.AST.ImporStatement.*;
 import Front.AST.CSS.Value.FunctionNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +20,19 @@ public class SymbolTableVisitor {
         this.symbolTable = symbolTable;
     }
 
-    public void visit(Program node) {
+    public Object visit(Program node) {
         if (node == null) {
-            return;
+            return null;
         }
         for (ASTNode statement : node.statements) {
             visit(statement);
         }
+        return  null;
     }
 
-    public void visit(ASTNode node){
-        if (node == null){
-            return;
+    public Object visit(ASTNode node){
+        if (node == null) {
+            return null;
         }
         if (node instanceof BlockNode){
             visit((BlockNode)node);
@@ -44,20 +46,24 @@ public class SymbolTableVisitor {
             visit((SimpleStatementsNode)node);
         } else if (node instanceof ImportNode) {
             visit((ImportNode)node);
+        }else {
+            return null;
         }
-
+        return  null;
     }
 
-    public void visit(DecoratorNode node){
+    public Object visit(DecoratorNode node){
+        if (node == null) {
+            return null;
+        }
         List<TemplateInfo> templates = new ArrayList<>();
         FunctionDefNode fnode = node.function;
-        String templateName;
         symbolTable.enterScope();
         if (fnode.parameters != null){
             for (ExpressionNode param:fnode.parameters.arguments){
                 if (param instanceof NameAtomNode) {
                     DataType type = getDataType(param);
-                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type));
+                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type,null));
                 }
             }
         }
@@ -68,6 +74,7 @@ public class SymbolTableVisitor {
                 ,node.line
                 ,node.decorates.get(0).pathParameters
                 ,templates));
+        return  null;
     }
 
     private TemplateInfo analyzeRenderTemplate(CallExpressionNode node){
@@ -93,7 +100,7 @@ public class SymbolTableVisitor {
                         templateParams.add(symbol);
                     }else {
                         DataType type = getDataType(arg);
-                        templateParams.add(new VariableSymbol(name.value,name.line,type));
+                        templateParams.add(new VariableSymbol(name.value,name.line,type,null));
                     }
 
                 }
@@ -143,15 +150,19 @@ public class SymbolTableVisitor {
         }
     }
 
-    public void visit(SimpleStatementsNode node){
+    public Object visit(SimpleStatementsNode node){
+        if (node == null) {
+            return null;
+        }
         for (SimpleStatementNode statement : node.statements) {
             visit((SimpleStatementNode)statement);
         }
+        return  null;
     }
 
-    public void visit(CompoundStatementNode node){
-        if (node == null){
-            return;
+    public Object visit(CompoundStatementNode node){
+        if (node == null) {
+            return null;
         }
         if (node instanceof ForStatementNode){
             visit((ForStatementNode)node);
@@ -162,10 +173,13 @@ public class SymbolTableVisitor {
         } else if (node instanceof TryStatementNode) {
             visit((TryStatementNode)node);
         }
+        return  null;
     }
 
-    public void visit(SimpleStatementNode node){
-        if (node == null) return;
+    public Object visit(SimpleStatementNode node){
+        if (node == null) {
+            return null;
+        }
         if (node instanceof ExpressionNode){
             visit((ExpressionNode)node);
         } else if (node instanceof FlowStatementNode) {
@@ -174,25 +188,37 @@ public class SymbolTableVisitor {
         else if (node instanceof ImportStatementNode){
             visit((ImportStatementNode)node);
         }
+        return  null;
     }
 
-    public void visit(FlowStatementNode node){
+    public Object visit(FlowStatementNode node){
+        if (node == null) {
+            return null;
+        }
         if (node instanceof ReturnStatementNode){
             visit((ReturnStatementNode)node);
         } else if (node instanceof RaiseStatementNode) {
             visit((RaiseStatementNode)node);
         }
+        return  null;
     }
 
-    public void visit(ImportStatementNode node){
+    public Object visit(ImportStatementNode node){
+        if (node == null) {
+            return null;
+        }
         if (node instanceof ImportFromNode){
             visit((ImportFromNode)node);
         } else if (node instanceof ImportNameNode) {
             visit((ImportNameNode)node);
         }
+        return  null;
     }
 
-    public void visit(ImportFromNode node){
+    public Object visit(ImportFromNode node){
+        if (node == null) {
+            return null;
+        }
         for (ImportAsNameNode n:node.importAsNames.importAsNameNodes){
             if (n.alias != null){
                 symbolTable.define(new FunctionSymbol(n.alias,n.line,0,null));
@@ -200,9 +226,13 @@ public class SymbolTableVisitor {
                 symbolTable.define(new FunctionSymbol(n.name,n.line,0,null));
             }
         }
+        return  null;
     }
 
-    public void visit(ImportNameNode node){
+    public Object visit(ImportNameNode node){
+        if (node == null) {
+            return null;
+        }
         for (DottedAsNameNode n : node.DottedAsNames){
             if (n.alias != null){
                 symbolTable.define(new FunctionSymbol(n.alias,n.line,0,null));
@@ -210,20 +240,29 @@ public class SymbolTableVisitor {
                 symbolTable.define(new FunctionSymbol(n.dottedName.parts.get(n.dottedName.parts.size()-1),n.line,0,null));
             }
         }
+        return  null;
     }
 
-    public void visit(ReturnStatementNode node){
+    public Object visit(ReturnStatementNode node){
+        if (node == null) {
+            return null;
+        }
         visit(node.expression);
+        return  null;
     }
 
-    public void visit(RaiseStatementNode node){
+    public Object visit(RaiseStatementNode node){
+        if (node == null) {
+            return null;
+        }
         visit(node.expressionBeforeFrom);
         visit(node.expressionAfterFrom);
+        return  null;
     }
 
-    public void visit(ExpressionNode node){
-        if (node == null){
-            return;
+    public Object visit(ExpressionNode node){
+        if (node == null) {
+            return null;
         }
         if (node instanceof ArgumentsExpressionNode){
             visit((ArgumentsExpressionNode)node);
@@ -238,26 +277,27 @@ public class SymbolTableVisitor {
         } else if (node instanceof CompareExpressionNode) {
             visit((CompareExpressionNode)node);
         } else if (node instanceof DictionaryExpressionNode){
-            visit((DictionaryExpressionNode)node);
+           return visit((DictionaryExpressionNode)node);
         }else if (node instanceof IndexExpressionNode) {
             visit((IndexExpressionNode)node);
         } else if (node instanceof ListExpressionNode){
-            visit((ListExpressionNode)node);
+           return visit((ListExpressionNode)node);
         }else if (node instanceof TupleExpressionNode) {
-            visit((TupleExpressionNode)node);
+          return   visit((TupleExpressionNode)node);
         } else if (node instanceof UnaryExpressionNode){
             visit((UnaryExpressionNode)node);
-        }else if (node instanceof NameAtomNode){
-         Symbol symbol =  symbolTable.lookup(((NameAtomNode) node).value);
-            if (symbol == null){
-                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node).value + "  at line :" + node.line);
-            }
+        }else if (node instanceof AtomNode){
+            return visit((AtomNode)node);
         } else if (node instanceof ArithmeticExpressionNode) {
             visit((ArithmeticExpressionNode) node);
         }
+        return  null;
     }
 
-    public void visit(AttributeExpressionNode node){
+    public Object visit(AttributeExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.value instanceof NameAtomNode){
             Symbol symbol = symbolTable.lookup(((NameAtomNode) node.value).value);
             if (symbol == null){
@@ -266,9 +306,13 @@ public class SymbolTableVisitor {
         }else {
             visit(node.value);
         }
+        return  null;
     }
 
-    public void visit(UnaryExpressionNode node){
+    public Object visit(UnaryExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.operand instanceof NameAtomNode){
             Symbol symbol = symbolTable.lookup(((NameAtomNode) node.operand).value);
             if (symbol == null){
@@ -277,9 +321,13 @@ public class SymbolTableVisitor {
         }else {
             visit(node.operand);
         }
+        return  null;
     }
 
-    public void visit(BinaryExpressionNode node){
+    public Object visit(BinaryExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.left instanceof NameAtomNode){
             Symbol symbol = symbolTable.lookup(((NameAtomNode) node.left).value);
             if (symbol == null){
@@ -292,15 +340,19 @@ public class SymbolTableVisitor {
             if (right instanceof NameAtomNode){
                 Symbol symbol = symbolTable.lookup(((NameAtomNode) right).value);
                 if (symbol == null){
-                    throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) right).value + "  at line :" + ((NameAtomNode) right).line);
+                    throw new RuntimeException("Error undefined :  name " + ((NameAtomNode) right).value + "  at line :" + ((NameAtomNode) right).line);
                 }
             }else {
                 visit(right);
             }
         }
+        return  null;
     }
 
-    public void visit(ArithmeticExpressionNode node){
+    public Object visit(ArithmeticExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         DataType leftType = getDataType(node.left);
         DataType rightType = getDataType(node.right);
         boolean isValid =
@@ -313,9 +365,13 @@ public class SymbolTableVisitor {
         if (isValid){
             throw  new RuntimeException("Mismatch type error : "+leftType+" , "+rightType+"  at line : "+node.line);
         }
+        return  null;
     }
 
-    public void visit(CompareExpressionNode node){
+    public Object visit(CompareExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.left instanceof NameAtomNode){
             Symbol symbol = symbolTable.lookup(((NameAtomNode) node.left).value);
             if (symbol == null){
@@ -334,10 +390,13 @@ public class SymbolTableVisitor {
                 visit(right);
             }
         }
+        return  null;
     }
 
-    public void visit(IndexExpressionNode node){
-        if (node == null)return;
+    public Object visit(IndexExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.object instanceof NameAtomNode){
             String name = ((NameAtomNode) node.object).value;
             Symbol symbol = symbolTable.lookup(name);
@@ -352,24 +411,34 @@ public class SymbolTableVisitor {
         }else {
             visit(node.object);
         }
+        return  null;
     }
 
-    public void visit(DictionaryExpressionNode node){
-        if (node == null)return;
+    public Object visit(DictionaryExpressionNode node){
+        if (node == null) {
+            return null;
+        }
+        Map<Object, Object> dict = new HashMap<>();
         for (Map.Entry<ExpressionNode, ExpressionNode> element : node.map.entrySet()) {
             if (!isValidDictionaryKey(element.getKey())) {
                 throw new RuntimeException("Type Error: " + element.getKey().name + " is not valid key at line " + node.line);
             }
+            Object key = visit(element.getKey());
             if (element.getValue() instanceof NameAtomNode){
                 String name = ((NameAtomNode) element.getValue()).value;
                Symbol sym =  symbolTable.lookup(name);
                 if (sym == null) {
                     throw new RuntimeException("Error undefined name : " + name + "  at line :" + node.line);
                 }
+                if (sym instanceof VariableSymbol){
+                    dict.put(key, ((VariableSymbol) sym).getData());
+                }
             }else {
-                visit(element.getValue());
+              Object o =   visit(element.getValue());
+              dict.put(key, o);
             }
         }
+        return  dict;
     }
 
     private boolean isValidDictionaryKey(ExpressionNode node){
@@ -377,8 +446,10 @@ public class SymbolTableVisitor {
         return (node instanceof StringAtomNode) || (node instanceof IntNumberAtomNode) || (node instanceof BoolAtomNode) || (node instanceof DoubleNumberAtomNode) || (node instanceof NoneAtomNode) || (node instanceof TupleExpressionNode);
     }
 
-    public void visit(TupleExpressionNode node){
-        if (node == null)return;
+    public Object visit(TupleExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         for (ExpressionNode element : node.elements) {
             if (element instanceof NameAtomNode){
               Symbol symbol =   symbolTable.lookup(((NameAtomNode) element).value);
@@ -389,25 +460,59 @@ public class SymbolTableVisitor {
                 visit(element);
             }
         }
+        return  null;
     }
 
-    public void visit(ListExpressionNode node){
-        if (node == null)return;
+    public Object visit(ListExpressionNode node){
+        if (node == null) {
+            return null;
+        }
+        List<Object> list = new ArrayList<>();
         for (ExpressionNode element : node.elements) {
             if (element instanceof NameAtomNode){
                Symbol symbol =  symbolTable.lookup(((NameAtomNode) element).value);
                 if (symbol == null){
                     throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) element).value + "  at line :" + element.line);
                 }
+                if (symbol instanceof VariableSymbol){
+                     list.add(((VariableSymbol) symbol).getData());
+                }
             }else {
-                visit(element);
+               Object object =  visit(element);
+               list.add(object);
             }
+        }
+        return  list;
+    }
+
+    public Object visit(AtomNode node){
+        if (node == null)return null;
+        if (node instanceof StringAtomNode){
+            return ((StringAtomNode) node).value;
+        } else if (node instanceof BoolAtomNode) {
+            return ((BoolAtomNode) node).value;
+        } else if (node instanceof DoubleNumberAtomNode) {
+            return ((DoubleNumberAtomNode) node).value;
+        } else if (node instanceof  IntNumberAtomNode) {
+            return  ((IntNumberAtomNode) node).value;
+        } else if (node instanceof NameAtomNode) {
+            Symbol symbol =  symbolTable.lookup(((NameAtomNode) node).value);
+            if (symbol == null){
+                throw  new RuntimeException("Error undefined :  name " + ((NameAtomNode) node).value + "  at line :" + node.line);
+            }
+            if (symbol instanceof VariableSymbol){
+                return ((VariableSymbol) symbol).getData();
+            }else {
+                return null;
+            }
+        }else {
+            return null;
         }
     }
 
-    public void visit(ImportNode node){
-        if (node == null){
-            return;
+    public Object visit(ImportNode node){
+        if (node == null) {
+            return null;
         }
         if (node instanceof DottedAsNameNode){
             visit(node);
@@ -418,10 +523,14 @@ public class SymbolTableVisitor {
         }else if (node instanceof ImportAsNamesNode){
             visit(node);
         }
+        return  null;
     }
 
-    public void visit(AssignmentStatement node){
-        visit(node.value);
+    public Object visit(AssignmentStatement node){
+        if (node == null) {
+            return null;
+        }
+       Object object =  visit(node.value);
         DataType type = getDataType(node.value);
         for (ExpressionNode taget:node.targets){
             if (taget instanceof NameAtomNode){
@@ -429,7 +538,7 @@ public class SymbolTableVisitor {
                         new VariableSymbol(
                                 ((NameAtomNode) taget).value,
                                 taget.line,
-                                type
+                                type,object
                         )
                 );
             }else if (isPrimitive(taget)){
@@ -438,6 +547,7 @@ public class SymbolTableVisitor {
                 visit(taget);
             }
         }
+        return  null;
     }
 
     private boolean isPrimitive(ExpressionNode node){
@@ -473,7 +583,10 @@ public class SymbolTableVisitor {
         return DataType.UNKNOWN;
     }
 
-    public void visit(FunctionDefNode node){
+    public Object visit(FunctionDefNode node){
+        if (node == null) {
+            return null;
+        }
         int paramsCount = 0;
         if (node.parameters != null){
             paramsCount = node.parameters.arguments.size();
@@ -484,15 +597,19 @@ public class SymbolTableVisitor {
             for (ExpressionNode param:node.parameters.arguments){
                 if (param instanceof NameAtomNode) {
                     DataType type = getDataType(param);
-                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type));
+                    symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,type,null));
                 }
             }
         }
         visit(node.body);
         symbolTable.exitScope();
+        return  null;
     }
 
-    public void visit(CallExpressionNode node){
+    public Object visit(CallExpressionNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.function instanceof NameAtomNode) {
             String funcName = ((NameAtomNode) node.function).value;
             Symbol sym = symbolTable.lookup(funcName);
@@ -510,11 +627,12 @@ public class SymbolTableVisitor {
             visit(node.function);
         }
         visit(node.arguments);
+        return  null;
     }
 
-    public void visit(ArgumentsExpressionNode node){
-        if(node == null){
-            return;
+    public Object visit(ArgumentsExpressionNode node){
+        if (node == null) {
+            return null;
         }
        for (ExpressionNode argument:node.arguments){
            if (argument instanceof NameAtomNode){
@@ -525,20 +643,22 @@ public class SymbolTableVisitor {
                }
            }
        }
+        return  null;
     }
 
-    public void visit(BlockNode node){
-        if (node == null){
-            return;
+    public Object visit(BlockNode node){
+        if (node == null) {
+            return null;
         }
         for (ASTNode statement: node.statements){
             visit(statement);
         }
+        return  null;
     }
 
-    private void visit(IfStatementNode node){
-        if (node ==null){
-            return;
+    private Object visit(IfStatementNode node){
+        if (node == null) {
+            return null;
         }
         if (node.condition instanceof NameAtomNode){
             Symbol symbol = symbolTable.lookup(((NameAtomNode) node.condition).value);
@@ -563,10 +683,13 @@ public class SymbolTableVisitor {
         if (node.elseBody != null){
             visit(node.elseBody);
         }
+        return  null;
     }
 
-    public void visit(ForStatementNode node){
-        if (node == null)return;
+    public Object visit(ForStatementNode node){
+        if (node == null) {
+            return null;
+        }
         if (node.expression instanceof  NameAtomNode) {
           Symbol symbol =  symbolTable.lookup(((NameAtomNode) node.expression).value);
             if (symbol == null){
@@ -577,7 +700,7 @@ public class SymbolTableVisitor {
         }
         for (ExpressionNode param : node.params){
             if (param instanceof NameAtomNode){
-                symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,DataType.UNKNOWN));
+                symbolTable.define(new VariableSymbol(((NameAtomNode) param).value,param.line,DataType.UNKNOWN,null));
             }else{
                 visit(param);
             }
@@ -586,13 +709,17 @@ public class SymbolTableVisitor {
         if (node.elseBody != null){
             visit(node.elseBody.body);
         }
+        return  null;
     }
 
-    public void visit(TryStatementNode node){
-        if (node == null) return;
+    public Object visit(TryStatementNode node){
+        if (node == null) {
+            return null;
+        }
         visit(node.body);
         for (TryStatementNode.Except ex:node.excepts){
             visit(ex.body);
         }
+        return  null;
     }
 }

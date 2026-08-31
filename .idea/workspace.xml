@@ -8,9 +8,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back_test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back_test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Back/Visitor/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Back/Visitor/ASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CodeGeneration/BackGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeGeneration/BackGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CodeGeneration/FrontGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CodeGeneration/FrontGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/RouteSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/RouteSymbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableFrontVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableFrontVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/SymbolTableVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SymbolTable/VariableSymbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SymbolTable/VariableSymbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_product.txt" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product_detail.txt" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

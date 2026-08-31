@@ -93,7 +93,7 @@ public class SymbolTableFrontVisitor {
             checkVariable((NameNode)node.expression.expression);
         }
         symbolTable.enterScope();
-        symbolTable.define(new VariableSymbol(node.itrator.value,node.itrator.line,DataType.UNKNOWN));
+        symbolTable.define(new VariableSymbol(node.itrator.value,node.itrator.line,DataType.UNKNOWN,null));
         for (ASTNode element:node.elements){
             visit(element);
         }
@@ -117,9 +117,10 @@ public class SymbolTableFrontVisitor {
     public void visit(CallExpressionNode node){
         if (node==null)return;
         if (node.function instanceof NameNode){
-            checkVariable((NameNode) node.function);
             if (((NameNode) node.function).value.equals("url_for")){
                 analyzeUrlforMethod(node);
+            }else {
+                checkVariable((NameNode) node.function);
             }
         }else {
             visit(node.function);
@@ -153,7 +154,6 @@ public class SymbolTableFrontVisitor {
             visit(node.value);
         }
     }
-    public  void visit(ArgumentListNode node){}
 
     public void visit(HtmlDocument node){
         if (node == null)return;

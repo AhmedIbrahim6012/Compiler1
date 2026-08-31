@@ -10,6 +10,7 @@ import Front.AST.CSS.Selector.*;
 import Front.AST.CSS.Property.*;
 import Front.AST.CSS.Value.*;
 import Front.AST.CSS.combinators.*;
+import Front.AST.StringNode;
 
 public class FrontGenerator {
 
@@ -194,7 +195,7 @@ public class FrontGenerator {
         if (node == null) return "";
 
         if (node instanceof NameNode) return ((NameNode) node).value;
-        if (node instanceof Front.AST.StringNode) return ((Front.AST.StringNode) node).value;
+        if (node instanceof StringNode) return ((Front.AST.StringNode) node).value;
         if (node instanceof Front.AST.CSS.Value.StringNode) return "\"" + ((Front.AST.CSS.Value.StringNode) node).value + "\"";
         if (node instanceof TextNode) return ((TextNode) node).text;
         if (node instanceof IntNumberAtomNode) return String.valueOf(((IntNumberAtomNode) node).value);
